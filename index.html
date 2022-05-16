@@ -208,13 +208,14 @@
             </div>
 
             <div class="form-row">
-              <input id="botonAguinaldo"  value="Calcular Aguinaldo" type="submit" class="btn btn-light centrado" disabled/>
+              <input id="botonAguinaldo" value="Calcular Aguinaldo" type="submit" class="btn btn-light centrado" disabled/>
             </div>
           </form>
           <!-- Div con el resultado del calculo, dinamico con JS -->
           <div id="resultadosAguinaldo" class="resultadosAguinaldo">
           </div>
         </div>
+
         <!-- ISR -->
         <div
           class="tab-pane fade"
@@ -222,7 +223,8 @@
           role="tabpanel"
           aria-labelledby="tabRetencion"
         >
-          <form>
+        <div class="contenidoTab">
+          <form id="formISR">
             <div class="form-row">
               <!-- Range para el salario -->
               <div class="form-group col-md-12">
@@ -235,12 +237,32 @@
               </div>
             </div>
             <div class="form-row">
-              <button type="button" class="btn btn-light centrado">
-                Calcular Retención de impuestos.
-              </button>
+              <input id="botonISR" value="Calcular Retención" type="submit" class="btn btn-light centrado" disabled/>
             </div>
           </form>
+          <!-- Tabla de segmentos con JS -->
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Lìmite Inferior (MXN)</th>
+                  <th scope="col">Lìmite Superior (MXN)</th>
+                  <th scope="col">Cuota Fija (MXN)</th>
+                  <th scope="col">% Sobre excedente</th>
+                </tr>
+              </thead>
+              <tbody id="tableBodySegmentos">
+                <!-- Contenido creado en JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Resultados de la retencion -->
+          <div id="resultadosISR" class="resultadosAguinaldo">
+
+          </div>
         </div>
+        </div>
+
         <!-- Declaracion Anual -->
         <div
           class="tab-pane fade contenedorCalculadora"
@@ -362,8 +384,11 @@
       </div>
     </footer>
 
-    <!-- Script propio para la funcionalidad -->
-    <script src="./main.js"></script>
+    <!-- Scripts propios para la funcionalidad -->
+    
+    <script src="./JS/main.js"></script>
+    <script src="./JS/ISR.js"></script>
+    
 
     <!-- Scripts de Bootstrap -->
     <script

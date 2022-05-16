@@ -662,12 +662,18 @@ legend {
 }
 
 .resultadosAguinaldo div {
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin: 0px auto;
   background-color: #eeeded;
   padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-flow: column;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.contenidoTab{
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
 }
