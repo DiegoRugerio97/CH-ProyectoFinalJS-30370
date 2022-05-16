@@ -3,6 +3,10 @@ const valorInput = (input) => {
     return parseFloat(input.value);
 }
 
+const valorInputText = (input) => {
+    return input.value;
+}
+
 //Alertas
 const alertas = document.getElementById("alertas");
 const crearAlerta = () => {

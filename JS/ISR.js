@@ -28,6 +28,7 @@ new limite(8, 81211.25, 108281.67, 19582.83, 0.32),
 new limite(9, 108281.67, 324845.01, 28245.36, 0.34),
 new limite(10, 324845.01, 10000000, 101876.9, 0.35)];
 
+// Creacion de la tabla de limites
 const crearTablaLimites = (arrayLimites) => {
     let tableBody = document.getElementById("tableBodySegmentos");
     arrayLimites.forEach((limite) => {
@@ -41,6 +42,7 @@ const crearTablaLimites = (arrayLimites) => {
         tableBody.append(tableRow);
     });
 }
+// Se ejecuta funcion con info de los LIMITES_ISR
 crearTablaLimites(LIMITES_ISR);
 
 // Input

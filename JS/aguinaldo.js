@@ -116,6 +116,12 @@ radioDiasTrabajadosSi.addEventListener("click", () => {
     anioCumplido = true;
 });
 
+// Constantes
+const DIAS_MES = 30.5;
+const DIAS_ANIO = 365;
+
+
+
 // Logica del calculo de aguinaldo refactorizada
 const calcularAguinaldo = () => {
     // Si se ha trabajado minimo un año en la empresa

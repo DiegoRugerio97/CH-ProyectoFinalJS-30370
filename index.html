@@ -270,14 +270,14 @@
 
         <!-- Declaracion Anual -->
         <div
-          class="tab-pane fade contenedorCalculadora"
+          class="tab-pane fade"
           id="declaracionAnual"
           role="tabpanel"
           aria-labelledby="tabAnual"
         >
-        <!-- Form para agregar conceptos -->
+        <div class="contenidoTab">
           <div class="formDec centrado">
-            <form>
+            <form id="formConcepto">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputTipo">Tipo de concepto</label>
@@ -305,18 +305,18 @@
                 <div class="form-group col-md-6">
                   <label for="inputMes">Mes del ingreso/gasto deducible</label>
                   <select class="custom-select" id="inputMes">
-                    <option value="enero" selected>Enero</option>
-                    <option value="feb" selected>Febrero</option>
-                    <option value="marzo" selected>Marzo</option>
-                    <option value="abril" selected>Abril</option>
-                    <option value="mayo" selected>Mayo</option>
-                    <option value="jun" selected>Junio</option>
-                    <option value="jul" selected>Julio</option>
-                    <option value="ago" selected>Agosto</option>
-                    <option value="sep" selected>Septiembre</option>
-                    <option value="oct" selected>Octubre</option>
-                    <option value="nov" selected>Noviembre</option>
-                    <option value="dic" selected>Diciembre</option>
+                    <option value="Enero" selected>Enero</option>
+                    <option value="Febrero" >Febrero</option>
+                    <option value="Marzo" >Marzo</option>
+                    <option value="Abril" >Abril</option>
+                    <option value="Mayo" >Mayo</option>
+                    <option value="Junio" >Junio</option>
+                    <option value="Julio" >Julio</option>
+                    <option value="Agosto" >Agosto</option>
+                    <option value="Septiembre" >Septiembre</option>
+                    <option value="Octubre" >Octubre</option>
+                    <option value="Noviembre" >Noviembre</option>
+                    <option value="Diciembre" >Diciembre</option>
                   </select>
                   <small id="inputMesAux" class="form-text text-muted">
                     Selecciona el mes donde se realizo el gasto o se obtuvo el
@@ -338,7 +338,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <button type="submit" class="btn btn-light centrado">
+                <button type="submit" class="btn btn-light centrado" id="botonAgregarConcepto" disabled>
                   Agregar concepto
                 </button>
               </div>
@@ -347,11 +347,19 @@
           <!-- Donde ir agregando las cards -->
           <div class="contenedorResultados">
             <!-- Colocar cards de ingresos -->
-            <div></div>
+            <div class = "contenedorCards" id="ingresos"></div>
             <!-- Colocar cards de gastos -->
-            <div></div>
+            <div class = "contenedorCards" id="gastos"></div>
           </div>
-
+          <form id="formDeclaracionAnual">
+            <div class="form-row">
+              <button type="submit" class="btn btn-light centrado" id="botonCalcularDeclaracion">
+                Declaración Anual
+              </button>
+            </div>
+          </form>
+          <div id="resultadosDeclaracion"></div>
+        </div>
         </div>
       </section>
     </main>
@@ -391,8 +399,8 @@
     <!-- Scripts propios para la funcionalidad -->
     <script src="./JS/utilidades.js"></script>
     <script src="./JS/aguinaldo.js"></script>
-    <script src="./JS/main.js"></script>
     <script src="./JS/ISR.js"></script>
+    <script src="./JS/declaracionAnual.js"></script>
     
 
     <!-- Scripts de Bootstrap -->
