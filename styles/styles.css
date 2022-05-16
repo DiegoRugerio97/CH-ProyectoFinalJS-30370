@@ -677,3 +677,8 @@ legend {
   flex-flow: column nowrap;
   gap: 30px;
 }
+
+/* ISR */
+.segSelec{
+  background-color: rgba(39, 39, 124, 0.219) !important;
+}
