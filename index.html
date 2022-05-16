@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS de Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+    <!-- CSS Propio -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <title>C&R|Calculadoras</title>
+    <!-- SEO - Keywords -->
+    <meta
+      name="keywords"
+      content="nomina, retencion, impuestos, vacaciones, gastos, ISR, IVA"
+    />
+    <!-- SEO Descripcion -->
+    <meta
+      name="description"
+      content="Responde este sencillo formulario para evaluar tu situación y nuestros expertos se pondrán en vacacioneso contigo para brindarte las mejores soluciones para tu negocio."
+    />
+  </head>
+  <body class="bodyFondo">
+    <!-- Nav Responsive de BS -->
+    <nav class="navbar navbar-expand-md navbar-light row py-0 contenedorHeader">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#"
+        ><img src="./img/logo.svg" alt="Logo" class="contenedorHeaderLogo"
+      /></a>
+      <!-- Toggler/collapsibe Button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Conócenos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Calculadora</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Breadcrumbs de BS -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="../index.html">Alianza y Consultoría Empresarial</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Calculadora</li>
+      </ol>
+    </nav>
+
+    <!-- Contenido - Calculadora -->
+    <main class="container">
+      <!-- Tabs para cambiar de tipo de calculadora -->
+      <ul class="nav nav-tabs row" id="tabPagina" role="tablist">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            id="tabAguinaldo"
+            data-toggle="tab"
+            href="#aguinaldo"
+            role="tab"
+            aria-controls="aguinaldo"
+            aria-selected="true"
+            >Aguinaldo</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="tabRetencion"
+            data-toggle="tab"
+            href="#retencion"
+            role="tab"
+            aria-controls="retencion"
+            aria-selected="false"
+            >Retención de Impuestos</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="tabAnual"
+            data-toggle="tab"
+            href="#declaracionAnual"
+            role="tab"
+            aria-controls="declaracionAnual"
+            aria-selected="false"
+            >Declaración Anual</a
+          >
+        </li>
+      </ul>
+
+      <!-- Contenido -->
+      <section class="tab-content" id="tabPagina">
+        <!-- Alerta -->
+        <div id="alertas">
+        </div>
+        <!-- Aguinaldo -->
+        <div
+          class="tab-pane fade show active"
+          id="aguinaldo"
+          role="tabpanel"
+          aria-labelledby="tabAguinaldo"
+        >
+          <form id = "calcularAguinaldo">
+            <!-- Range para el salario -->
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputSalarioAg">Salario Mensual (MXN)</label>
+                <input
+                  type="number"
+                  class="form-control campoTexto"
+                  id="inputSalarioAg"
+                />
+                <small id="inputSalarioAgAux" class="form-text text-muted">
+                  Introduce tu salario mensual en bruto (en pesos mexicanos
+                  MXN).
+                </small>
+              </div>
+            </div>
+            <div class="form-row">
+              <!-- Dias de aguinaldo -->
+              <div class="form-group col-md-6">
+                <label for="inputDias">Días de Aguinaldo.</label>
+                <input
+                  type="number"
+                  class="form-control campoTexto"
+                  id="inputDias"
+                />
+                <small id="inputDiasAux" class="form-text text-muted">
+                  Introduce los días que tu empresa te proporciona como
+                  aguinaldo (mínimo 15 dias por ley).
+                </small>
+              </div>
+              <!-- Radio para cumplimiento de año o menos en la empresa -->
+              <fieldset>
+                <legend>¿Ya cumpliste el año de trabajo en tu empresa?</legend>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="trabajoCumplido"
+                    id="inputRadioSi"
+                    value="si"
+                    checked
+                  />
+                  <label class="form-check-label" for="inputRadioSi">
+                    Sí
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="trabajoCumplido"
+                    id="inputRadioNo"
+                    value="no"
+                  />
+                  <label class="form-check-label" for="inputRadioNo">
+                    No
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <!-- Input adicional en caso de haber marcado 'No' en el radio -->
+            <!-- Aparecera en caso de haber seleccionado No -->
+            <div class="form-row hidden" id="formDiasTrabajados"">
+              <div class="form-group col-md-6">
+                <label for="inputDiasTrabajados"
+                >Días del año trabajados.</label
+                >
+                <input
+                type="number"
+                class="form-control campoTexto"
+                id="inputDiasTrabajados"
+                />
+                <small id="inputDiasTrabajadosAux" class="form-text text-muted">
+                Introduce los días trabajados en tu empresa.
+                </small>
+                </div>
+            </div>
+
+            <div class="form-row">
+              <input id="botonAguinaldo"  value="Calcular Aguinaldo" type="submit" class="btn btn-light centrado" disabled/>
+            </div>
+          </form>
+          <!-- Div con el resultado del calculo, dinamico con JS -->
+          <div id="resultadosAguinaldo" class="resultadosAguinaldo">
+          </div>
+        </div>
+        <!-- ISR -->
+        <div
+          class="tab-pane fade"
+          id="retencion"
+          role="tabpanel"
+          aria-labelledby="tabRetencion"
+        >
+          <form>
+            <div class="form-row">
+              <!-- Range para el salario -->
+              <div class="form-group col-md-12">
+                <label for="inputSalarioISR">Salario Mensual (MXN)</label>
+                <input
+                  type="number"
+                  class="form-control campoTexto"
+                  id="inputSalarioISR"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <button type="button" class="btn btn-light centrado">
+                Calcular Retención de impuestos.
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Declaracion Anual -->
+        <div
+          class="tab-pane fade contenedorCalculadora"
+          id="declaracionAnual"
+          role="tabpanel"
+          aria-labelledby="tabAnual"
+        >
+        <!-- Form para agregar conceptos -->
+          <div class="formDec centrado">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputTipo">Tipo de concepto</label>
+                  <select class="custom-select" id="inputTipo">
+                    <option value="ingreso" selected>Ingreso</option>
+                    <option value="gastoDeducible">Gasto Deducible</option>
+                  </select>
+                  <small id="inputTipoAux" class="form-text text-muted">
+                    Selecciona el tipo de concepto a registrar.
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputConcepto">Concepto del ingreso/gasto</label>
+                  <input
+                    type="text"
+                    class="form-control campoTexto"
+                    id="inputConcepto"
+                  />
+                  <small id="inputTipoAux" class="form-text text-muted">
+                    Introduce la descripción del concepto.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputMes">Mes del ingreso/gasto deducible</label>
+                  <select class="custom-select" id="inputMes">
+                    <option value="enero" selected>Enero</option>
+                    <option value="feb" selected>Febrero</option>
+                    <option value="marzo" selected>Marzo</option>
+                    <option value="abril" selected>Abril</option>
+                    <option value="mayo" selected>Mayo</option>
+                    <option value="jun" selected>Junio</option>
+                    <option value="jul" selected>Julio</option>
+                    <option value="ago" selected>Agosto</option>
+                    <option value="sep" selected>Septiembre</option>
+                    <option value="oct" selected>Octubre</option>
+                    <option value="nov" selected>Noviembre</option>
+                    <option value="dic" selected>Diciembre</option>
+                  </select>
+                  <small id="inputMesAux" class="form-text text-muted">
+                    Selecciona el mes donde se realizo el gasto o se obtuvo el
+                    ingreso.
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputMonto"
+                    >Monto del concepto en pesos mexicanos (MXN).</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control campoTexto"
+                    id="inputMonto"
+                  />
+                  <small id="inputMontoAux" class="form-text text-muted">
+                    Introduce el monto del ingreso o del gasto deducible.
+                  </small>
+                </div>
+              </div>
+              <div class="form-row">
+                <button type="button" class="btn btn-light centrado">
+                  Agregar concepto
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Donde ir agregando las cards -->
+          <div class="contenedorResultados">
+            <!-- Colocar cards de ingresos -->
+            <div></div>
+            <!-- Colocar cards de gastos -->
+            <div></div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer v2.0 -->
+    <footer class="footer container-fluid px-0">
+      <div class="footerUpper centrado">
+        <span class="alignCentro">© Alianza y Consultoría Empresarial C&R</span>
+        <a
+          href="https://www.facebook.com/Alianza-y-Consultor%C3%ADa-Empresarial-CR-104931214911213"
+          class="alignCentro"
+          ><img
+            src="./img/icons/faceboog.svg"
+            alt="Facebook"
+            class="footerLogoFb"
+        /></a>
+      </div>
+      <div class="footerBottom row">
+        <div>
+          <span class="footerNavTitulo">Empresarial</span>
+          <ul>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Calculadora</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="footerNavTitulo">Acerca</span>
+          <ul>
+            <li><a href="#">Conocenos</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script propio para la funcionalidad -->
+    <script src="./main.js"></script>
+
+    <!-- Scripts de Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+      integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
