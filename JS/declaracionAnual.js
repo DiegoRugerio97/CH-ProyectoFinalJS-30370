@@ -169,7 +169,7 @@ const validacionConcepto = (e) => {
 }
 
 const validacionMonto = (e) => {
-    let isValid = e.target.value > 0;
+    let isValid = e.target.value >= 0;
     if (!isValid) {
         e.target.className = "form-control campoTexto invalido";
         montoCorrecto = false;

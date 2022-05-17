@@ -55,7 +55,8 @@ let salarioMensualCorrecto = false;
 const botonISR = document.getElementById("botonISR");
 // Validacion del input
 const validacionSalarioISR = (e) => {
-    if (e.target.value <= 0) {
+    let menorCero = e.target.value <= 0;
+    if (menorCero) {
         e.target.className = "form-control campoTexto invalido";
         salarioMensualCorrecto = false;
         botonAguinaldo.setAttribute("disabled", "");
