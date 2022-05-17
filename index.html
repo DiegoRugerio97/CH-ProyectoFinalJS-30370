@@ -121,6 +121,7 @@
         <!-- Alerta -->
         <div id="alertas">
         </div>
+
         <!-- Aguinaldo -->
         <div
           class="tab-pane fade show active"
@@ -128,93 +129,99 @@
           role="tabpanel"
           aria-labelledby="tabAguinaldo"
         >
-          <form id = "calcularAguinaldo">
-            <!-- Range para el salario -->
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="inputSalarioAg">Salario Mensual (MXN)</label>
-                <input
+          <div class="contenidoTab">
+            <form id = "calcularAguinaldo">
+              <!-- Input para el salario -->
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="inputSalarioAg">Salario Mensual (MXN)</label>
+                  <input
+                    type="number"
+                    class="form-control campoTexto"
+                    id="inputSalarioAg"
+                  />
+                  <small id="inputSalarioAgAux" class="form-text text-muted">
+                    Introduce tu salario mensual en bruto (en pesos mexicanos
+                    MXN).
+                  </small>
+                </div>
+              </div>
+              <div class="form-row">
+                <!-- Dias de aguinaldo -->
+                <div class="form-group col-md-6">
+                  <label for="inputDias">Días de Aguinaldo.</label>
+                  <input
+                    type="number"
+                    class="form-control campoTexto"
+                    id="inputDias"
+                  />
+                  <small id="inputDiasAux" class="form-text text-muted">
+                    Introduce los días que tu empresa te proporciona como
+                    aguinaldo (mínimo 15 dias por ley).
+                  </small>
+                </div>
+                <!-- Radio para cumplimiento de año o menos en la empresa -->
+                <fieldset>
+                  <legend>¿Ya cumpliste el año de trabajo en tu empresa?</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="trabajoCumplido"
+                      id="inputRadioSi"
+                      value="si"
+                      checked
+                    />
+                    <label class="form-check-label" for="inputRadioSi">
+                      Sí
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="trabajoCumplido"
+                      id="inputRadioNo"
+                      value="no"
+                    />
+                    <label class="form-check-label" for="inputRadioNo">
+                      No
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+  
+              <!-- Input adicional en caso de haber marcado 'No' en el radio -->
+              <!-- Aparecera en caso de haber seleccionado No -->
+              <div class="form-row hidden" id="formDiasTrabajados"">
+                <div class="form-group col-md-6">
+                  <label for="inputDiasTrabajados"
+                  >Días del año trabajados.</label
+                  >
+                  <input
                   type="number"
                   class="form-control campoTexto"
-                  id="inputSalarioAg"
-                />
-                <small id="inputSalarioAgAux" class="form-text text-muted">
-                  Introduce tu salario mensual en bruto (en pesos mexicanos
-                  MXN).
-                </small>
-              </div>
-            </div>
-            <div class="form-row">
-              <!-- Dias de aguinaldo -->
-              <div class="form-group col-md-6">
-                <label for="inputDias">Días de Aguinaldo.</label>
-                <input
-                  type="number"
-                  class="form-control campoTexto"
-                  id="inputDias"
-                />
-                <small id="inputDiasAux" class="form-text text-muted">
-                  Introduce los días que tu empresa te proporciona como
-                  aguinaldo (mínimo 15 dias por ley).
-                </small>
-              </div>
-              <!-- Radio para cumplimiento de año o menos en la empresa -->
-              <fieldset>
-                <legend>¿Ya cumpliste el año de trabajo en tu empresa?</legend>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="trabajoCumplido"
-                    id="inputRadioSi"
-                    value="si"
-                    checked
+                  id="inputDiasTrabajados"
                   />
-                  <label class="form-check-label" for="inputRadioSi">
-                    Sí
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="trabajoCumplido"
-                    id="inputRadioNo"
-                    value="no"
-                  />
-                  <label class="form-check-label" for="inputRadioNo">
-                    No
-                  </label>
-                </div>
-              </fieldset>
+                  <small id="inputDiasTrabajadosAux" class="form-text text-muted">
+                  Introduce los días trabajados en tu empresa.
+                  </small>
+                  </div>
+              </div>
+  
+              <div class="form-row">
+                <button type="submit" class="btn btn-light centrado" id="botonAguinaldo" disabled>
+                  Calcular Aguinaldo
+                </button>
+              </div>
+            </form>
+            <!-- Div con el resultado del calculo, dinamico con JS -->
+            <div id="resultadosAguinaldo" class="resultadosAguinaldo">
             </div>
-
-            <!-- Input adicional en caso de haber marcado 'No' en el radio -->
-            <!-- Aparecera en caso de haber seleccionado No -->
-            <div class="form-row hidden" id="formDiasTrabajados"">
-              <div class="form-group col-md-6">
-                <label for="inputDiasTrabajados"
-                >Días del año trabajados.</label
-                >
-                <input
-                type="number"
-                class="form-control campoTexto"
-                id="inputDiasTrabajados"
-                />
-                <small id="inputDiasTrabajadosAux" class="form-text text-muted">
-                Introduce los días trabajados en tu empresa.
-                </small>
-                </div>
-            </div>
-
-            <div class="form-row">
-              <input id="botonAguinaldo"  value="Calcular Aguinaldo" type="submit" class="btn btn-light centrado" disabled/>
-            </div>
-          </form>
-          <!-- Div con el resultado del calculo, dinamico con JS -->
-          <div id="resultadosAguinaldo" class="resultadosAguinaldo">
           </div>
+          
         </div>
+
         <!-- ISR -->
         <div
           class="tab-pane fade"
@@ -222,7 +229,8 @@
           role="tabpanel"
           aria-labelledby="tabRetencion"
         >
-          <form>
+        <div class="contenidoTab">
+          <form id="formISR">
             <div class="form-row">
               <!-- Range para el salario -->
               <div class="form-group col-md-12">
@@ -235,22 +243,44 @@
               </div>
             </div>
             <div class="form-row">
-              <button type="button" class="btn btn-light centrado">
-                Calcular Retención de impuestos.
+              <button type="submit" class="btn btn-light centrado" id="botonISR" disabled>
+                Calcular Retención
               </button>
             </div>
           </form>
+          <!-- Tabla de segmentos con JS -->
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Lìmite Inferior (MXN)</th>
+                  <th scope="col">Lìmite Superior (MXN)</th>
+                  <th scope="col">Cuota Fija (MXN)</th>
+                  <th scope="col">% Sobre excedente</th>
+                </tr>
+              </thead>
+              <tbody id="tableBodySegmentos">
+                <!-- Contenido creado en JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Resultados de la retencion -->
+          <div id="resultadosISR" class="resultadosAguinaldo">
+
+          </div>
         </div>
+        </div>
+
         <!-- Declaracion Anual -->
         <div
-          class="tab-pane fade contenedorCalculadora"
+          class="tab-pane fade"
           id="declaracionAnual"
           role="tabpanel"
           aria-labelledby="tabAnual"
         >
-        <!-- Form para agregar conceptos -->
+        <div class="contenidoTab">
           <div class="formDec centrado">
-            <form>
+            <form id="formConcepto">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputTipo">Tipo de concepto</label>
@@ -274,23 +304,22 @@
                   </small>
                 </div>
               </div>
-
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputMes">Mes del ingreso/gasto deducible</label>
                   <select class="custom-select" id="inputMes">
-                    <option value="enero" selected>Enero</option>
-                    <option value="feb" selected>Febrero</option>
-                    <option value="marzo" selected>Marzo</option>
-                    <option value="abril" selected>Abril</option>
-                    <option value="mayo" selected>Mayo</option>
-                    <option value="jun" selected>Junio</option>
-                    <option value="jul" selected>Julio</option>
-                    <option value="ago" selected>Agosto</option>
-                    <option value="sep" selected>Septiembre</option>
-                    <option value="oct" selected>Octubre</option>
-                    <option value="nov" selected>Noviembre</option>
-                    <option value="dic" selected>Diciembre</option>
+                    <option value="Enero" selected>Enero</option>
+                    <option value="Febrero" >Febrero</option>
+                    <option value="Marzo" >Marzo</option>
+                    <option value="Abril" >Abril</option>
+                    <option value="Mayo" >Mayo</option>
+                    <option value="Junio" >Junio</option>
+                    <option value="Julio" >Julio</option>
+                    <option value="Agosto" >Agosto</option>
+                    <option value="Septiembre" >Septiembre</option>
+                    <option value="Octubre" >Octubre</option>
+                    <option value="Noviembre" >Noviembre</option>
+                    <option value="Diciembre" >Diciembre</option>
                   </select>
                   <small id="inputMesAux" class="form-text text-muted">
                     Selecciona el mes donde se realizo el gasto o se obtuvo el
@@ -312,7 +341,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <button type="button" class="btn btn-light centrado">
+                <button type="submit" class="btn btn-light centrado" id="botonAgregarConcepto" disabled>
                   Agregar concepto
                 </button>
               </div>
@@ -321,11 +350,19 @@
           <!-- Donde ir agregando las cards -->
           <div class="contenedorResultados">
             <!-- Colocar cards de ingresos -->
-            <div></div>
+            <div class = "contenedorCards" id="ingresos"></div>
             <!-- Colocar cards de gastos -->
-            <div></div>
+            <div class = "contenedorCards" id="gastos"></div>
           </div>
-
+          <form id="formDeclaracionAnual">
+            <div class="form-row">
+              <button type="submit" class="btn btn-light centrado" id="botonCalcularDeclaracion">
+                Declaración Anual
+              </button>
+            </div>
+          </form>
+          <div id="resultadosDeclaracion"></div>
+        </div>
         </div>
       </section>
     </main>
@@ -362,8 +399,12 @@
       </div>
     </footer>
 
-    <!-- Script propio para la funcionalidad -->
-    <script src="./main.js"></script>
+    <!-- Scripts propios para la funcionalidad -->
+    <script src="./JS/utilidades.js"></script>
+    <script src="./JS/aguinaldo.js"></script>
+    <script src="./JS/ISR.js"></script>
+    <script src="./JS/declaracionAnual.js"></script>
+    
 
     <!-- Scripts de Bootstrap -->
     <script
