@@ -27,56 +27,50 @@ const validacionFormAguinaldo = () => {
     return anioCumplido ? (salarioAguinaldoCorrecto && diasCorrecto) : (salarioAguinaldoCorrecto && diasCorrecto && diasTrabajadosCorrecto);
 }
 
-// Nueva funcion utilizando condicional ternaria.
-const habilitarBoton = (valido) => {
-    valido ? botonAguinaldo.removeAttribute("disabled") : botonAguinaldo.setAttribute("disabled", "");
-}
-
 // Handlers para cada input
 const validacionSalarioAguinaldo = (e) => {
-    let menorCero = e.target.value <= 0 ;
-    if (menorCero) {
-        e.target.className = "form-control campoTexto invalido";
-        salarioAguinaldoCorrecto = false;
-        crearAlerta();
-    }
-    else {
-        e.target.className = "form-control campoTexto";
+    let mayorCero = e.target.value > 0 ;
+    if (mayorCero) {
         salarioAguinaldoCorrecto = true;
         limpiarAlerta();
     }
-    let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid);
-}
-const validacionDias = (e) => {
-    let menorQuince = e.target.value < 15 ;
-    if (menorQuince) {
-        e.target.className = "form-control campoTexto invalido";
-        diasCorrecto = false;
+    else {
+        salarioAguinaldoCorrecto = false;
         crearAlerta();
     }
-    else {
-        e.target.className = "form-control campoTexto";
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorCero);
+}
+const validacionDias = (e) => {
+    let mayorQuince = e.target.value >= 15 ;
+    if (mayorQuince) {
         diasCorrecto = true;
         limpiarAlerta();
     }
-    let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid);
-}
-const validacionDiasTrabajados = (e) => {
-    let menorCero = e.target.value <= 0 ;
-    if (menorCero) {
-        e.target.className = "form-control campoTexto invalido";
-        diasTrabajadosCorrecto = false;
+    else {
+        diasCorrecto = false;
         crearAlerta();
     }
-    else {
-        e.target.className = "form-control campoTexto";
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorQuince);
+
+}
+const validacionDiasTrabajados = (e) => {
+    let mayorCero = e.target.value > 0 ;
+    if (mayorCero) {
         diasTrabajadosCorrecto = true;
         limpiarAlerta();
     }
+    else {
+        diasTrabajadosCorrecto = false;
+        crearAlerta();
+    }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid);
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorCero);
+
 }
 // Asignacion de event listeners
 inputSalarioAguinaldo.addEventListener("blur", validacionSalarioAguinaldo);

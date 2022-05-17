@@ -149,44 +149,40 @@ const validacionFormDeclaracion = () => {
 
 // Validaciones de inputs
 const validacionConcepto = (e) => {
-    let isValid = e.target.value.length > 0;
-    if (!isValid) {
-        e.target.className = "form-control campoTexto invalido";
-        conceptoCorrecto = false;
-        crearAlerta();
-    }
-    else {
+    let isValid = e.target.value.trim() != "";
+    if (isValid) {
         e.target.className = "form-control campoTexto";
         conceptoCorrecto = true;
         limpiarAlerta();
     }
-    if (validacionFormDeclaracion()) {
-        botonAgregar.removeAttribute("disabled");    
-    }
     else {
-        botonAgregar.setAttribute("disabled", "");
+        e.target.className = "form-control campoTexto invalido";
+        conceptoCorrecto = false;
+        crearAlerta();
     }
+    let isValidForm = validacionFormDeclaracion();
+    habilitarBoton(isValidForm, botonAgregar);
+    renderValidacionInput(e.target,isValid);
+
+    
 }
 
 const validacionMonto = (e) => {
-    let isValid = e.target.value >= 0;
-    if (!isValid) {
-        e.target.className = "form-control campoTexto invalido";
-        montoCorrecto = false;
-        crearAlerta();
-    }
-    else {
+    let mayorCero = e.target.value > 0;
+    if (mayorCero) {
         e.target.className = "form-control campoTexto";
         montoCorrecto = true;
         limpiarAlerta();
     }
-    if (validacionFormDeclaracion()) {
-        botonAgregar.removeAttribute("disabled");
-    }
     else {
-        botonAgregar.setAttribute("disabled", "");
-        
+        e.target.className = "form-control campoTexto invalido";
+        montoCorrecto = false;
+        crearAlerta();
     }
+    let isValid = validacionFormDeclaracion();
+    habilitarBoton(isValid, botonAgregar);
+    renderValidacionInput(e.target,mayorCero);
+
 }
 
 // Agregar los event listeners
