@@ -140,20 +140,28 @@ let montoCorrecto = false;
 // Boton
 const botonAgregar = document.getElementById("botonAgregarConcepto");
 
+const validacionFormDeclaracion = () => {
+    return conceptoCorrecto && montoCorrecto;
+}
+
 // Validaciones de inputs
 const validacionConcepto = (e) => {
     let isValid = e.target.value.length > 0;
     if (!isValid) {
         e.target.className = "form-control campoTexto invalido";
         conceptoCorrecto = false;
-        botonAgregar.setAttribute("disabled", "");
         crearAlerta();
     }
     else {
         e.target.className = "form-control campoTexto";
         conceptoCorrecto = true;
-        botonAgregar.removeAttribute("disabled");
         limpiarAlerta();
+    }
+    if (validacionFormDeclaracion()) {
+        botonAgregar.removeAttribute("disabled");    
+    }
+    else {
+        botonAgregar.setAttribute("disabled", "");
     }
 }
 
@@ -162,14 +170,19 @@ const validacionMonto = (e) => {
     if (!isValid) {
         e.target.className = "form-control campoTexto invalido";
         montoCorrecto = false;
-        botonAgregar.setAttribute("disabled", "");
         crearAlerta();
     }
     else {
         e.target.className = "form-control campoTexto";
         montoCorrecto = true;
-        botonAgregar.removeAttribute("disabled");
         limpiarAlerta();
+    }
+    if (validacionFormDeclaracion()) {
+        botonAgregar.removeAttribute("disabled");
+    }
+    else {
+        botonAgregar.setAttribute("disabled", "");
+        
     }
 }
 
@@ -194,7 +207,7 @@ const handlerAgregarConcepto = (e) => {
         renderIngresos(ingresos);
     }
     e.target.reset();
-    botonAgregar.setAttribute("disabled","");
+    botonAgregar.setAttribute("disabled", "");
 }
 
 const formConcepto = document.getElementById("formConcepto");
@@ -226,7 +239,7 @@ const resultadosDeclaracion = document.getElementById("resultadosDeclaracion");
 
 const handlerDeclarar = (e) => {
     e.preventDefault();
-    const resultado = compararAcumulados(ingresos,gastos);
+    const resultado = compararAcumulados(ingresos, gastos);
     reportarResultados(resultadosDeclaracion, resultado);
 }
 

@@ -639,22 +639,6 @@ legend {
 }
 
 /* Aguinaldo */
-.resultadosAguinaldo {
-  display: flex;
-  padding: 20px;
-}
-
-.resultadosAguinaldo div {
-  font-size: 1.75rem;
-  margin: 0px auto;
-  background-color: #eeeded;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-}
-
 .contenidoTab{
   display: flex;
   flex-flow: column nowrap;

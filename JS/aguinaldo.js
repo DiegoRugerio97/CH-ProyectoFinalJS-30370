@@ -10,9 +10,9 @@ let salarioAguinaldoCorrecto = false;
 let diasCorrecto = false;
 let diasTrabajadosCorrecto = false;
 // Booleanos para guardar estado de input touched/untouched
-let salarioTouched = false;
-let diasTouched = false;
-let diasTrabajadosTouched = false;
+// let salarioTouched = false;
+// let diasTouched = false;
+// let diasTrabajadosTouched = false;
 
 // Boton de calculo aguinaldo
 const botonAguinaldo = document.getElementById("botonAguinaldo");
@@ -30,54 +30,54 @@ const validacionSalarioAguinaldo = (e) => {
     if (e.target.value <= 0) {
         e.target.className = "form-control campoTexto invalido";
         salarioAguinaldoCorrecto = false;
+        crearAlerta();
     }
     else {
         e.target.className = "form-control campoTexto";
         salarioAguinaldoCorrecto = true;
+        limpiarAlerta();
     }
     if (validacionFormAguinaldo()) {
         botonAguinaldo.removeAttribute("disabled");
-        limpiarAlerta();
     }
     else {
         botonAguinaldo.setAttribute("disabled", "");
-        crearAlerta();
     }
 }
 const validacionDias = (e) => {
     if (e.target.value < 15) {
         e.target.className = "form-control campoTexto invalido";
         diasCorrecto = false;
+        crearAlerta();
     }
     else {
         e.target.className = "form-control campoTexto";
         diasCorrecto = true;
+        limpiarAlerta();
     }
     if (validacionFormAguinaldo()) {
         botonAguinaldo.removeAttribute("disabled");
-        limpiarAlerta();
     }
     else {
         botonAguinaldo.setAttribute("disabled", "");
-        crearAlerta();
     }
 }
 const validacionDiasTrabajados = (e) => {
     if (e.target.value <= 0) {
         e.target.className = "form-control campoTexto invalido";
         diasTrabajadosCorrecto = false;
+        crearAlerta();
     }
     else {
         e.target.className = "form-control campoTexto";
         diasTrabajadosCorrecto = true;
+        limpiarAlerta();
     }
     if (validacionFormAguinaldo()) {
         botonAguinaldo.removeAttribute("disabled");
-        limpiarAlerta();
     }
     else {
         botonAguinaldo.setAttribute("disabled", "");
-        crearAlerta();
     }
 }
 // Asignacion de event listeners
@@ -85,20 +85,20 @@ inputSalarioAguinaldo.addEventListener("blur", validacionSalarioAguinaldo);
 inputDias.addEventListener("blur", validacionDias);
 inputDiasTrabajados.addEventListener("blur", validacionDiasTrabajados);
 
-//Handlers touched para cada input
-const touchedSalario = () => {
-    salarioTouched = true;
-}
-const touchedDias = () => {
-    diasTouched = true;
-}
-const touchedDiasTrabajados = () => {
-    diasTrabajadosTouched = true;
-}
+// //Handlers touched para cada input
+// const touchedSalario = () => {
+//     salarioTouched = true;
+// }
+// const touchedDias = () => {
+//     diasTouched = true;
+// }
+// const touchedDiasTrabajados = () => {
+//     diasTrabajadosTouched = true;
+// }
 // Asignacion de event listeners
-inputSalarioAguinaldo.addEventListener("blur", touchedSalario);
-inputDias.addEventListener("blur", touchedDias);
-inputDiasTrabajados.addEventListener("blur", touchedDiasTrabajados);
+// inputSalarioAguinaldo.addEventListener("blur", touchedSalario);
+// inputDias.addEventListener("blur", touchedDias);
+// inputDiasTrabajados.addEventListener("blur", touchedDiasTrabajados);
 
 // Input Extra del form para los dias trabajados en caso de no haber cumplido el año
 let anioCumplido = true;
@@ -143,10 +143,12 @@ const resultadosAguinaldo = document.getElementById("resultadosAguinaldo");
 // Handler para el submit
 const aguinaldoHandler = (e) => {
     e.preventDefault();
-    resultadosAguinaldo.innerHTML = `<div>
-                                    <span>Te corresponde un aguinaldo de: </span>
-                                    <span> $${calcularAguinaldo()} (MXN)<span/>
-                                    </div>`;
+    resultadosAguinaldo.innerHTML = `<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Resultado</h5>
+      <p class="card-text">Te corresponde un aguinaldo de $${calcularAguinaldo().toLocaleString('en-Latn-US')}</p>
+    </div>
+  </div>`;
     // e.target.reset();
 }
 // Se asigna el event listener

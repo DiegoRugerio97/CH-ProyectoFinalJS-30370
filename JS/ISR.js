@@ -3,7 +3,7 @@
 // Constantes para calculo de retencion de impuestos
 // Clase limite
 class limite {
-    constructor(id,limiteInferior, limiteSuperior, cuotaFija, porcentaje) {
+    constructor(id, limiteInferior, limiteSuperior, cuotaFija, porcentaje) {
         this.limiteInferior = limiteInferior;
         this.limiteSuperior = limiteSuperior;
         this.cuotaFija = cuotaFija;
@@ -84,14 +84,14 @@ const calcularISR = (salarioMensual) => {
     return limiteAsignado;
 }
 
-const resetSegmentos = () =>{
+const resetSegmentos = () => {
     LIMITES_ISR.forEach(limite => {
         let segmento = document.getElementById(`limite${limite.id}`);
         segmento.className = "";
     })
 }
 
-const seleccionarSegmento = (id) =>{
+const seleccionarSegmento = (id) => {
     resetSegmentos();
     const segmentoSeleccionado = document.getElementById(`limite${id}`);
     segmentoSeleccionado.className = "segSelec";
@@ -104,12 +104,15 @@ const ISRHandler = (e) => {
     const salarioMensual = valorInput(inputSalarioMensual);
     const ISR = calcularISR(salarioMensual);
     seleccionarSegmento(ISR.id);
-    resultadosISR.innerHTML = `<div>
-                                    <span>Con un salario mensual de: $${salarioMensual.toLocaleString('en-Latn-US')} (MXN).</span>
-                                    <span>La retención del ISR según la ley federal del trabajo es de: $${ISR.retencion.toLocaleString('en-Latn-US')} (MXN).<span/><br>
-                                    <span>Resultando en un ingreso neto de: $${(salarioMensual - ISR.retencion).toLocaleString('en-Latn-US')} (MXN). <span/><br>
-                                    </div>`;
-    // e.target.reset();
+    resultadosISR.innerHTML = `<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Resultado</h5>
+      <p class="card-text">Con un salario mensual de: $${salarioMensual.toLocaleString('en-Latn-US')} (MXN).</p>
+      <p class="card-text">La retención del ISR según la ley federal del trabajo es de: $${ISR.retencion.toLocaleString('en-Latn-US')} (MXN).</p>
+      <p class="card-text">Resultando en un ingreso neto de: $${(salarioMensual - ISR.retencion).toLocaleString('en-Latn-US')} (MXN).</p>
+    </div>
+  </div>`;
+    e.target.reset();
 }
 // Se asigna el event listener
 const formISR = document.getElementById("formISR");
