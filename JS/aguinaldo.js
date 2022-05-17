@@ -17,67 +17,60 @@ let diasTrabajadosCorrecto = false;
 const botonAguinaldo = document.getElementById("botonAguinaldo");
 
 const validacionFormAguinaldo = () => {
-    if (anioCumplido) {
-        return salarioAguinaldoCorrecto && diasCorrecto;
-    }
-    else {
-        return salarioAguinaldoCorrecto && diasCorrecto && diasTrabajadosCorrecto;
-    }
+    // if (anioCumplido) {
+    //     return salarioAguinaldoCorrecto && diasCorrecto;
+    // }
+    // else {
+    //     return salarioAguinaldoCorrecto && diasCorrecto && diasTrabajadosCorrecto;
+    // }
+    // Refactorizacion a expresion ternaria.
+    return anioCumplido ? (salarioAguinaldoCorrecto && diasCorrecto) : (salarioAguinaldoCorrecto && diasCorrecto && diasTrabajadosCorrecto);
 }
+
 // Handlers para cada input
 const validacionSalarioAguinaldo = (e) => {
-    if (e.target.value <= 0) {
-        e.target.className = "form-control campoTexto invalido";
-        salarioAguinaldoCorrecto = false;
-        crearAlerta();
-    }
-    else {
-        e.target.className = "form-control campoTexto";
+    let mayorCero = e.target.value > 0 ;
+    if (mayorCero) {
         salarioAguinaldoCorrecto = true;
         limpiarAlerta();
     }
-    if (validacionFormAguinaldo()) {
-        botonAguinaldo.removeAttribute("disabled");
-    }
     else {
-        botonAguinaldo.setAttribute("disabled", "");
-    }
-}
-const validacionDias = (e) => {
-    if (e.target.value < 15) {
-        e.target.className = "form-control campoTexto invalido";
-        diasCorrecto = false;
+        salarioAguinaldoCorrecto = false;
         crearAlerta();
     }
-    else {
-        e.target.className = "form-control campoTexto";
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorCero);
+}
+const validacionDias = (e) => {
+    let mayorQuince = e.target.value >= 15 ;
+    if (mayorQuince) {
         diasCorrecto = true;
         limpiarAlerta();
     }
-    if (validacionFormAguinaldo()) {
-        botonAguinaldo.removeAttribute("disabled");
-    }
     else {
-        botonAguinaldo.setAttribute("disabled", "");
-    }
-}
-const validacionDiasTrabajados = (e) => {
-    if (e.target.value <= 0) {
-        e.target.className = "form-control campoTexto invalido";
-        diasTrabajadosCorrecto = false;
+        diasCorrecto = false;
         crearAlerta();
     }
-    else {
-        e.target.className = "form-control campoTexto";
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorQuince);
+
+}
+const validacionDiasTrabajados = (e) => {
+    let mayorCero = e.target.value > 0 ;
+    if (mayorCero) {
         diasTrabajadosCorrecto = true;
         limpiarAlerta();
     }
-    if (validacionFormAguinaldo()) {
-        botonAguinaldo.removeAttribute("disabled");
-    }
     else {
-        botonAguinaldo.setAttribute("disabled", "");
+        diasTrabajadosCorrecto = false;
+        crearAlerta();
     }
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid,botonAguinaldo);
+    renderValidacionInput(e.target,mayorCero);
+
 }
 // Asignacion de event listeners
 inputSalarioAguinaldo.addEventListener("blur", validacionSalarioAguinaldo);
@@ -118,8 +111,6 @@ radioDiasTrabajadosSi.addEventListener("click", () => {
 // Constantes
 const DIAS_MES = 30.5;
 const DIAS_ANIO = 365;
-
-
 
 // Logica del calculo de aguinaldo refactorizada
 const calcularAguinaldo = () => {

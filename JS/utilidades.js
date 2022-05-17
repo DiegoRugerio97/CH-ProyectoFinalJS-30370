@@ -19,3 +19,13 @@ const crearAlerta = () => {
 const limpiarAlerta = () => {
     alertas.innerHTML = "";
 }
+
+//funcion utilizando condicional ternaria.
+const habilitarBoton = (isValid,boton) => {
+    isValid ? boton.removeAttribute("disabled") : boton.setAttribute("disabled", "");
+}
+
+// Setear el class name 'invalido' para inputs que no pasaron la validacio
+const renderValidacionInput = (input,isValid) =>{
+    input.className = isValid ? "form-control campoTexto" : "form-control campoTexto invalido";
+}

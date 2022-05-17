@@ -55,18 +55,18 @@ let salarioMensualCorrecto = false;
 const botonISR = document.getElementById("botonISR");
 // Validacion del input
 const validacionSalarioISR = (e) => {
-    if (e.target.value <= 0) {
-        e.target.className = "form-control campoTexto invalido";
-        salarioMensualCorrecto = false;
-        botonAguinaldo.setAttribute("disabled", "");
-        crearAlerta();
-    }
-    else {
-        e.target.className = "form-control campoTexto";
+    let mayorCero = e.target.value > 0;
+    if (mayorCero) {
         salarioMensualCorrecto = true;
-        botonISR.removeAttribute("disabled");
         limpiarAlerta();
     }
+    else {
+        salarioMensualCorrecto = false;
+        crearAlerta();
+    }
+    habilitarBoton(mayorCero,botonISR);
+    renderValidacionInput(e.target,mayorCero);
+
 }
 // Se agrega el event listener al input
 inputSalarioMensual.addEventListener("blur", validacionSalarioISR);
