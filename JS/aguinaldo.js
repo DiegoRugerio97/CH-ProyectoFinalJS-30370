@@ -1,6 +1,5 @@
 // Calculo de Aguinaldo del trabajador
 // ****************************************************************************************************************
-// Informacion de los inputs
 // Inputs
 const inputSalarioAguinaldo = document.getElementById("inputSalarioAg");
 const inputDias = document.getElementById("inputDias");

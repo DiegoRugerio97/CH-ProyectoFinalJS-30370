@@ -21,23 +21,26 @@ class GastoDeducible {
 }
 // *************************************************************************************************
 // Obtener listas desde Local Storage
+// Refactorizacion a OR
 const obtenerGastosLS = () => {
-    let existeEnLS = localStorage.getItem("gastos");
-    if (existeEnLS) {
-        return JSON.parse(localStorage.getItem("gastos"));
-    }
-    else {
-        return [];
-    }
+    // let existeEnLS = localStorage.getItem("gastos");
+    // if (existeEnLS) {
+    //     return JSON.parse(localStorage.getItem("gastos"));
+    // }
+    // else {
+    //     return [];
+    // }
+    return JSON.parse(localStorage.getItem("gastos")) || [];
 }
 const obtenerIngresosLS = () => {
-    let existeEnLS = localStorage.getItem("ingresos");
-    if (existeEnLS) {
-        return JSON.parse(localStorage.getItem("ingresos"));
-    }
-    else {
-        return [];
-    }
+    // let existeEnLS = localStorage.getItem("ingresos");
+    // if (existeEnLS) {
+    //     return JSON.parse(localStorage.getItem("ingresos"));
+    // }
+    // else {
+    //     return [];
+    // }
+    return JSON.parse(localStorage.getItem("ingresos")) || [];
 }
 
 // Escribir en LS

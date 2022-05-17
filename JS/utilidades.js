@@ -1,4 +1,5 @@
 // Utilidad
+// Lectura de inputs
 const valorInput = (input) => {
     return parseFloat(input.value);
 }
@@ -8,6 +9,7 @@ const valorInputText = (input) => {
 }
 
 //Alertas
+// Creacion y limpieza de alerta
 const alertas = document.getElementById("alertas");
 const crearAlerta = () => {
     alertas.innerHTML = `<div class="alert alert-danger" role="alert">

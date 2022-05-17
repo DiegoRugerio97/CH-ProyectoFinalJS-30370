@@ -16,6 +16,8 @@ class limite {
     }
 }
 // Array de objetos limite
+// No tiene sentido guardarlos en LS
+// Se guardaran en algun server para ser fetcheados
 const LIMITES_ISR = [new limite(0, 0, 644.58, 0, .0192),
 new limite(1, 644.58, 5470.92, 12.38, 0.064),
 new limite(2, 5470.92, 9614.66, 321.26, 0.1088),
@@ -69,7 +71,7 @@ const validacionSalarioISR = (e) => {
 // Se agrega el event listener al input
 inputSalarioMensual.addEventListener("blur", validacionSalarioISR);
 
-// Resultados de la retencion
+// Contenedor de Resultados de la retencion
 const resultadosISR = document.getElementById("resultadosISR");
 
 // Logica refactorizada del calculo del ISR
@@ -84,6 +86,7 @@ const calcularISR = (salarioMensual) => {
     return limiteAsignado;
 }
 
+// Se limpia la clase del segmento asignado
 const resetSegmentos = () => {
     LIMITES_ISR.forEach(limite => {
         let segmento = document.getElementById(`limite${limite.id}`);
@@ -91,6 +94,7 @@ const resetSegmentos = () => {
     })
 }
 
+// Se le asigna la clase al segmento asignado
 const seleccionarSegmento = (id) => {
     resetSegmentos();
     const segmentoSeleccionado = document.getElementById(`limite${id}`);
@@ -102,7 +106,9 @@ const ISRHandler = (e) => {
     e.preventDefault();
     // Variable para guardar el salario mensual del usuario
     const salarioMensual = valorInput(inputSalarioMensual);
+    // OBJ ISR
     const ISR = calcularISR(salarioMensual);
+    // Se le pasa el id para seleccionar el segmento
     seleccionarSegmento(ISR.id);
     resultadosISR.innerHTML = `<div class="card">
     <div class="card-body">
