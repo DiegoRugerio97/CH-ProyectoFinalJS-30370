@@ -29,7 +29,7 @@ const validacionFormAguinaldo = () => {
 
 // Handlers para cada input
 const validacionSalarioAguinaldo = (e) => {
-    let mayorCero = e.target.value > 0 ;
+    let mayorCero = e.target.value > 0;
     if (mayorCero) {
         salarioAguinaldoCorrecto = true;
         limpiarAlerta();
@@ -37,13 +37,14 @@ const validacionSalarioAguinaldo = (e) => {
     else {
         salarioAguinaldoCorrecto = false;
         crearAlerta();
+        renderError("Ingresar un salario valido!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorCero);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorCero);
 }
 const validacionDias = (e) => {
-    let mayorQuince = e.target.value >= 15 ;
+    let mayorQuince = e.target.value >= 15;
     if (mayorQuince) {
         diasCorrecto = true;
         limpiarAlerta();
@@ -51,14 +52,15 @@ const validacionDias = (e) => {
     else {
         diasCorrecto = false;
         crearAlerta();
+        renderError("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorQuince);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorQuince);
 
 }
 const validacionDiasTrabajados = (e) => {
-    let mayorCero = e.target.value > 0 ;
+    let mayorCero = e.target.value > 0;
     if (mayorCero) {
         diasTrabajadosCorrecto = true;
         limpiarAlerta();
@@ -66,10 +68,11 @@ const validacionDiasTrabajados = (e) => {
     else {
         diasTrabajadosCorrecto = false;
         crearAlerta();
+        renderError("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorCero);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorCero);
 
 }
 // Asignacion de event listeners
