@@ -62,8 +62,7 @@ const validacionSalarioISR = (e) => {
     }
     else {
         salarioMensualCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar un salario valido!");
+        crearAlerta("Ingresar un salario valido!");
     }
     habilitarBoton(mayorCero,botonISR);
     renderValidacionInput(e.target,mayorCero);

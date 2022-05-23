@@ -36,8 +36,7 @@ const validacionSalarioAguinaldo = (e) => {
     }
     else {
         salarioAguinaldoCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar un salario valido!");
+        crearAlerta("Ingresar un salario valido!");
     }
     let isValid = validacionFormAguinaldo();
     habilitarBoton(isValid, botonAguinaldo);
@@ -51,8 +50,7 @@ const validacionDias = (e) => {
     }
     else {
         diasCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar una cantidad de días valida!");
+        crearAlerta("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
     habilitarBoton(isValid, botonAguinaldo);
@@ -67,8 +65,7 @@ const validacionDiasTrabajados = (e) => {
     }
     else {
         diasTrabajadosCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar una cantidad de días valida!");
+        crearAlerta("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
     habilitarBoton(isValid, botonAguinaldo);

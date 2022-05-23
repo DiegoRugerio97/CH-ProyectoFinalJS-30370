@@ -11,10 +11,11 @@ const valorInputText = (input) => {
 //Alertas
 // Creacion y limpieza de alerta
 const alertas = document.getElementById("alertas");
-const crearAlerta = () => {
+const crearAlerta = (msj) => {
     alertas.innerHTML = `<div class="alert alert-danger" role="alert">
     Favor de ingresar información correcta en los campos solicitados.
     </div>`;
+    renderError(msj);
 }
 
 const limpiarAlerta = () => {

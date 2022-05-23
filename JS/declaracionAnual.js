@@ -160,8 +160,7 @@ const validacionConcepto = (e) => {
     else {
         e.target.className = "form-control campoTexto invalido";
         conceptoCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar un concepto valido!");
+        crearAlerta("Ingresar un concepto valido!");
 
     }
     let isValidForm = validacionFormDeclaracion();
@@ -181,8 +180,7 @@ const validacionMonto = (e) => {
     else {
         e.target.className = "form-control campoTexto invalido";
         montoCorrecto = false;
-        crearAlerta();
-        renderError("Ingresar un monto valido!");
+        crearAlerta("Ingresar un monto valido!");
 
     }
     let isValid = validacionFormDeclaracion();
