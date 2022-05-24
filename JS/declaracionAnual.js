@@ -61,11 +61,13 @@ const eliminarGasto = (arrayGastos, id) => {
     let nuevosGastos = arrayGastos.filter(gasto => gasto.id != id);
     renderGastos(nuevosGastos);
     guardarGastosLS(nuevosGastos);
+    arrayGastos = obtenerGastosLS();
 }
 const eliminarIngreso = (arrayIngresos, id) => {
     let nuevosIngresos = arrayIngresos.filter(ingreso => ingreso.id != id);
     renderIngresos(nuevosIngresos);
     guardarIngresosLS(nuevosIngresos);
+    arrayIngresos = obtenerIngresosLS();
 }
 
 // Renderizar listas en el DOM
@@ -158,7 +160,8 @@ const validacionConcepto = (e) => {
     else {
         e.target.className = "form-control campoTexto invalido";
         conceptoCorrecto = false;
-        crearAlerta();
+        crearAlerta("Ingresar un concepto valido!");
+
     }
     let isValidForm = validacionFormDeclaracion();
     habilitarBoton(isValidForm, botonAgregar);
@@ -177,7 +180,8 @@ const validacionMonto = (e) => {
     else {
         e.target.className = "form-control campoTexto invalido";
         montoCorrecto = false;
-        crearAlerta();
+        crearAlerta("Ingresar un monto valido!");
+
     }
     let isValid = validacionFormDeclaracion();
     habilitarBoton(isValid, botonAgregar);
@@ -214,7 +218,9 @@ formConcepto.addEventListener("submit", handlerAgregarConcepto);
 
 // Calculo de la declaracion anual
 // Obtener la diferencia para determinar si es necesario realizar el pago de ISR
-const compararAcumulados = (arrayIngresos, arrayGastos) => {
+const compararAcumulados = () => {
+    const arrayGastos = obtenerGastosLS();
+    const arrayIngresos = obtenerIngresosLS();
     const acumuladoIngresos = arrayIngresos.reduce((acumulado, ingreso) => acumulado + ingreso.monto, 0);
     const acumuladoGastos = arrayGastos.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
     const diferencia = Math.abs(acumuladoIngresos - acumuladoGastos);

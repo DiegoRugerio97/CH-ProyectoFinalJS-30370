@@ -29,47 +29,47 @@ const validacionFormAguinaldo = () => {
 
 // Handlers para cada input
 const validacionSalarioAguinaldo = (e) => {
-    let mayorCero = e.target.value > 0 ;
+    let mayorCero = e.target.value > 0;
     if (mayorCero) {
         salarioAguinaldoCorrecto = true;
         limpiarAlerta();
     }
     else {
         salarioAguinaldoCorrecto = false;
-        crearAlerta();
+        crearAlerta("Ingresar un salario valido!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorCero);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorCero);
 }
 const validacionDias = (e) => {
-    let mayorQuince = e.target.value >= 15 ;
+    let mayorQuince = e.target.value >= 15;
     if (mayorQuince) {
         diasCorrecto = true;
         limpiarAlerta();
     }
     else {
         diasCorrecto = false;
-        crearAlerta();
+        crearAlerta("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorQuince);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorQuince);
 
 }
 const validacionDiasTrabajados = (e) => {
-    let mayorCero = e.target.value > 0 ;
+    let mayorCero = e.target.value > 0;
     if (mayorCero) {
         diasTrabajadosCorrecto = true;
         limpiarAlerta();
     }
     else {
         diasTrabajadosCorrecto = false;
-        crearAlerta();
+        crearAlerta("Ingresar una cantidad de días valida!");
     }
     let isValid = validacionFormAguinaldo();
-    habilitarBoton(isValid,botonAguinaldo);
-    renderValidacionInput(e.target,mayorCero);
+    habilitarBoton(isValid, botonAguinaldo);
+    renderValidacionInput(e.target, mayorCero);
 
 }
 // Asignacion de event listeners
