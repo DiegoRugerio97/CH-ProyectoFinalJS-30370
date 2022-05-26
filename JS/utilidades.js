@@ -54,9 +54,21 @@ const resetForms = () => {
     });
 }
 
+// Reset a botones
+const resetBotones = () =>{
+    const botones = document.getElementsByTagName("button");
+    Array.from(botones).forEach(boton => {
+        let containsDisabled = boton.getAttribute("disabled");
+        if (!containsDisabled) {
+            boton.setAttribute("disabled","");
+        }
+    });
+}
+
 const limpiarTab = () => {
     limpiarAlerta();
     resetForms();
+    resetBotones();
 }
 
 

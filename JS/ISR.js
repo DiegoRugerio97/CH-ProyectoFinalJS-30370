@@ -119,6 +119,7 @@ const ISRHandler = (e) => {
     </div>
   </div>`;
     e.target.reset();
+    habilitarBoton(false, botonISR);
 }
 // Se asigna el event listener
 const formISR = document.getElementById("formISR");
