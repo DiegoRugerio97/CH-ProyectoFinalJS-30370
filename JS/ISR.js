@@ -1,8 +1,44 @@
+
+// Implementacion de FETCH
+// Segmentos se guardan en una db de Firebase.
+// Se agrega el .json, especifico de Firebase
+const dbSegmentos = "https://ac-empresarial-db-default-rtdb.firebaseio.com/segmentos.json";
+const LIMITES_ISR = [];
+fetch(dbSegmentos).
+    then(response => response.ok ? response.json() : Promise.reject("Error al cargar datos."))
+    .then(data => cargarData(data, LIMITES_ISR))
+    .then(() => crearTablaLimites(LIMITES_ISR))
+    .catch(() => errorCarga());
+
+
+// Funciones aux
+const cargarData = (data, array) => {
+    data.forEach(segmento => array.push(new Limite(
+        segmento.id,
+        segmento.limiteInferior,
+        segmento.limiteSuperior,
+        segmento.cuotaFija,
+        segmento.porcentaje)))
+}
+
+// Bool para validar carga de datos
+
+let cargaDatosCorrecto = true;
+
+// Funcion para manejar el error en el fetch (Catch)
+const errorCarga = () =>{
+    cargaDatosCorrecto = false;
+    const tablaSegmentos = document.getElementById("tablaSegmentos");
+    tablaSegmentos.classList = "centrado";
+    tablaSegmentos.innerHTML = "<p>Error al obtener datos. Refresca la página o intenta mas tarde. </p>";
+    renderError("Error al obtener datos de segmentos. Intenta mas tarde.");
+}
+
 // ***********************************************************************************************************************
 // ISR
 // Constantes para calculo de retencion de impuestos
 // Clase limite
-class limite {
+class Limite {
     constructor(id, limiteInferior, limiteSuperior, cuotaFija, porcentaje) {
         this.limiteInferior = limiteInferior;
         this.limiteSuperior = limiteSuperior;
@@ -15,21 +51,6 @@ class limite {
         this.retencion = Math.round(((salarioMensual - this.limiteInferior) * this.porcentaje) + this.cuotaFija);
     }
 }
-// Array de objetos limite
-// No tiene sentido guardarlos en LS
-// Se guardaran en algun server para ser fetcheados
-const LIMITES_ISR = [new limite(0, 0, 644.58, 0, .0192),
-new limite(1, 644.58, 5470.92, 12.38, 0.064),
-new limite(2, 5470.92, 9614.66, 321.26, 0.1088),
-new limite(3, 9614.66, 11176.62, 772.1, 0.16),
-new limite(4, 11176.62, 13381.47, 1022.01, 0.1792),
-new limite(5, 13381.47, 26988.5, 1417.12, 0.2136),
-new limite(6, 26988.5, 42537.58, 4323.58, 0.2352),
-new limite(7, 42537.58, 81211.25, 7980.73, 0.3),
-new limite(8, 81211.25, 108281.67, 19582.83, 0.32),
-new limite(9, 108281.67, 324845.01, 28245.36, 0.34),
-new limite(10, 324845.01, 10000000, 101876.9, 0.35)];
-
 // Creacion de la tabla de limites
 const crearTablaLimites = (arrayLimites) => {
     let tableBody = document.getElementById("tableBodySegmentos");
@@ -44,8 +65,6 @@ const crearTablaLimites = (arrayLimites) => {
         tableBody.append(tableRow);
     });
 }
-// Se ejecuta funcion con info de los LIMITES_ISR
-crearTablaLimites(LIMITES_ISR);
 
 // Input
 const inputSalarioMensual = document.getElementById("inputSalarioISR");
@@ -64,8 +83,9 @@ const validacionSalarioISR = (e) => {
         salarioMensualCorrecto = false;
         crearAlerta("Ingresar un salario valido!");
     }
-    habilitarBoton(mayorCero,botonISR);
-    renderValidacionInput(e.target,mayorCero);
+    // Habilitar el boton cuando input sea correcto y datos hayan sido fetcheados correctamente
+    habilitarBoton(mayorCero && cargaDatosCorrecto, botonISR);
+    renderValidacionInput(e.target, mayorCero);
 
 }
 // Se agrega el event listener al input
@@ -119,6 +139,7 @@ const ISRHandler = (e) => {
     </div>
   </div>`;
     e.target.reset();
+    habilitarBoton(false, botonISR);
 }
 // Se asigna el event listener
 const formISR = document.getElementById("formISR");
