@@ -4,16 +4,35 @@
 // Se agrega el .json, especifico de Firebase
 const dbSegmentos = "https://ac-empresarial-db-default-rtdb.firebaseio.com/segmentos.json";
 const LIMITES_ISR = [];
-fetch(dbSegmentos).then(response => response.json())
-    .then(data => {
-        data.forEach(segmento => LIMITES_ISR.push(new Limite(
-            segmento.id,
-            segmento.limiteInferior,
-            segmento.limiteSuperior,
-            segmento.cuotaFija,
-            segmento.porcentaje)))
-    })
-    .then( () => crearTablaLimites(LIMITES_ISR));
+fetch(dbSegmentos).
+    then(response => response.ok ? response.json() : Promise.reject("Error al cargar datos."))
+    .then(data => cargarData(data, LIMITES_ISR))
+    .then(() => crearTablaLimites(LIMITES_ISR))
+    .catch(() => errorCarga());
+
+
+// Funciones aux
+const cargarData = (data, array) => {
+    data.forEach(segmento => array.push(new Limite(
+        segmento.id,
+        segmento.limiteInferior,
+        segmento.limiteSuperior,
+        segmento.cuotaFija,
+        segmento.porcentaje)))
+}
+
+// Bool para validar carga de datos
+
+let cargaDatosCorrecto = true;
+
+// Funcion para manejar el error en el fetch (Catch)
+const errorCarga = () =>{
+    cargaDatosCorrecto = false;
+    const tablaSegmentos = document.getElementById("tablaSegmentos");
+    tablaSegmentos.classList = "centrado";
+    tablaSegmentos.innerHTML = "<p>Error al obtener datos. Refresca la página o intenta mas tarde. </p>";
+    renderError("Error al obtener datos de segmentos. Intenta mas tarde.");
+}
 
 // ***********************************************************************************************************************
 // ISR
@@ -64,7 +83,8 @@ const validacionSalarioISR = (e) => {
         salarioMensualCorrecto = false;
         crearAlerta("Ingresar un salario valido!");
     }
-    habilitarBoton(mayorCero, botonISR);
+    // Habilitar el boton cuando input sea correcto y datos hayan sido fetcheados correctamente
+    habilitarBoton(mayorCero && cargaDatosCorrecto, botonISR);
     renderValidacionInput(e.target, mayorCero);
 
 }
