@@ -26,7 +26,6 @@ class GastoDeducible {
 const obtenerConceptosLS = (tipo) => {
     return JSON.parse(localStorage.getItem(tipo)) || [];
 }
-
 // Escribir en LS
 // Optimizacion
 const guardarConceptoLS = (tipo, array) => {

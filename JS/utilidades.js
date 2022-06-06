@@ -69,10 +69,19 @@ const resetBotones = () =>{
     });
 }
 
+const limpiarResultados = () =>{
+    resultadosISR.innerHTML = "";
+    resultadosDeclaracion.innerHTML = "";
+    resultadosAguinaldo.innerHTML = "";
+
+}
+
 const limpiarTab = () => {
     limpiarAlerta();
+    limpiarResultados();
     resetForms();
     resetBotones();
+    resetSegmentos();
 }
 
 
