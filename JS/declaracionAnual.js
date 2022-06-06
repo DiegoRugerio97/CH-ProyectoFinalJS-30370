@@ -22,100 +22,58 @@ class GastoDeducible {
 // *************************************************************************************************
 // Obtener listas desde Local Storage
 // Refactorizacion a OR
-const obtenerGastosLS = () => {
-    // let existeEnLS = localStorage.getItem("gastos");
-    // if (existeEnLS) {
-    //     return JSON.parse(localStorage.getItem("gastos"));
-    // }
-    // else {
-    //     return [];
-    // }
-    return JSON.parse(localStorage.getItem("gastos")) || [];
-}
-const obtenerIngresosLS = () => {
-    // let existeEnLS = localStorage.getItem("ingresos");
-    // if (existeEnLS) {
-    //     return JSON.parse(localStorage.getItem("ingresos"));
-    // }
-    // else {
-    //     return [];
-    // }
-    return JSON.parse(localStorage.getItem("ingresos")) || [];
+// Optimizacion
+const obtenerConceptosLS = (tipo) => {
+    return JSON.parse(localStorage.getItem(tipo)) || [];
 }
 
 // Escribir en LS
-const guardarGastosLS = (arrayGastos) => {
-    localStorage.setItem("gastos", JSON.stringify(arrayGastos));
+// Optimizacion
+const guardarConceptoLS = (tipo, array) => {
+    localStorage.setItem(tipo, JSON.stringify(array));
 }
-const guardarIngresosLS = (arrayIngresos) => {
-    localStorage.setItem("ingresos", JSON.stringify(arrayIngresos));
-}
-
 
 // Se inicializan las listas de conceptos
-const gastos = obtenerGastosLS();
-const ingresos = obtenerIngresosLS();
+const gastos = obtenerConceptosLS("gastos");
+const ingresos = obtenerConceptosLS("ingresos");
 
 // Funciones para eliminar concepto con click
-const eliminarGasto = (arrayGastos, id) => {
-    let nuevosGastos = arrayGastos.filter(gasto => gasto.id != id);
-    renderGastos(nuevosGastos);
-    guardarGastosLS(nuevosGastos);
-    arrayGastos = obtenerGastosLS();
-}
-const eliminarIngreso = (arrayIngresos, id) => {
-    let nuevosIngresos = arrayIngresos.filter(ingreso => ingreso.id != id);
-    renderIngresos(nuevosIngresos);
-    guardarIngresosLS(nuevosIngresos);
-    arrayIngresos = obtenerIngresosLS();
+// Optimizacion
+const eliminarConcepto = (tipo, array, id) => {
+    let nuevoArray = array.filter(elem => elem.id != id);
+    renderConceptos(tipo, nuevoArray);
+    guardarConceptoLS(tipo, nuevoArray);
+    array = obtenerConceptosLS(tipo);
+
 }
 
 // Renderizar listas en el DOM
-const renderGastos = (arrayGastos) => {
-    const contenedorGastos = document.getElementById("gastos");
-    contenedorGastos.innerHTML = "";
-    let isEmpty = arrayGastos.length == 0;
+// Optimizacion
+const renderConceptos = (tipo, array) => {
+    const contenedor = document.getElementById(tipo);
+    contenedor.innerHTML = "";
+    let isEmpty = array.length == 0;
     if (isEmpty) {
-        contenedorGastos.innerHTML = "<p>Agrega gastos.</p>"
+        contenedor.innerHTML = `<p>Agrega ${tipo}.</p>`
     }
     else {
-        arrayGastos.forEach(gasto => {
-            let cardGasto = document.createElement("div");
-            cardGasto.addEventListener("click", () => { eliminarGasto(arrayGastos, gasto.id) });
-            cardGasto.className = "card cardGasto";
-            cardGasto.innerHTML = `<div class="card-body">
-              <h5 class="card-title">${gasto.concepto}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${gasto.mes}</h6>
-              <p class="card-text">$${gasto.monto.toLocaleString('en-Latn-US')}.</p>
+        array.forEach(elem => {
+            let card = document.createElement("div");
+            let isGasto = tipo == "gastos";
+            card.addEventListener("click", () => { isGasto ? eliminarConcepto("gastos", array, elem.id) : eliminarConcepto("ingresos", array, elem.id) });
+            card.className = isGasto ? "card cardGasto" : "card cardIngreso";
+            card.innerHTML = `<div class="card-body">
+            <h5 class="card-title">${elem.concepto}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${elem.mes}</h6>
+            <p class="card-text">$${elem.monto.toLocaleString('en-Latn-US')}.</p>
             </div>`
-            contenedorGastos.append(cardGasto);
-        })
-    }
-}
-const renderIngresos = (arrayIngresos) => {
-    const contenedorIngresos = document.getElementById("ingresos");
-    contenedorIngresos.innerHTML = "";
-    let isEmpty = arrayIngresos.length == 0;
-    if (isEmpty) {
-        contenedorIngresos.innerHTML = "<p>Agrega ingresos.</p>"
-    }
-    else {
-        arrayIngresos.forEach(ingreso => {
-            let cardIngreso = document.createElement("div");
-            cardIngreso.addEventListener("click", () => { eliminarIngreso(arrayIngresos, ingreso.id) });
-            cardIngreso.className = "card cardIngreso";
-            cardIngreso.innerHTML = `<div class="card-body">
-              <h5 class="card-title">${ingreso.concepto}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${ingreso.mes}</h6>
-              <p class="card-text">$${ingreso.monto.toLocaleString('en-Latn-US')}.</p>
-            </div>`
-            contenedorIngresos.append(cardIngreso);
+            contenedor.append(card);
         })
     }
 }
 
-renderGastos(gastos);
-renderIngresos(ingresos);
+renderConceptos("gastos",gastos);
+renderConceptos("ingresos",ingresos);
 
 // Para el registro, se usara Date.now() para tener un id unico.
 // Registrar gastos deducibles
@@ -201,13 +159,13 @@ const handlerAgregarConcepto = (e) => {
     let isGasto = valorInputText(selectConcepto) === "gastoDeducible";
     if (isGasto) {
         registrarGastoDeducible(gastos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
-        guardarGastosLS(gastos);
-        renderGastos(gastos);
+        guardarConceptoLS("gastos",gastos);
+        renderConceptos("gastos",gastos);
     }
     else {
         registrarGastoDeducible(ingresos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
-        guardarIngresosLS(ingresos);
-        renderIngresos(ingresos);
+        guardarConceptoLS("ingresos",ingresos);
+        renderConceptos("ingresos",ingresos);
     }
     e.target.reset();
     botonAgregar.setAttribute("disabled", "");
@@ -221,8 +179,8 @@ formConcepto.addEventListener("submit", handlerAgregarConcepto);
 // Calculo de la declaracion anual
 // Obtener la diferencia para determinar si es necesario realizar el pago de ISR
 const compararAcumulados = () => {
-    const arrayGastos = obtenerGastosLS();
-    const arrayIngresos = obtenerIngresosLS();
+    const arrayGastos = obtenerConceptosLS("gastos");
+    const arrayIngresos = obtenerConceptosLS("ingresos");
     const acumuladoIngresos = arrayIngresos.reduce((acumulado, ingreso) => acumulado + ingreso.monto, 0);
     const acumuladoGastos = arrayGastos.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
     const diferencia = Math.abs(acumuladoIngresos - acumuladoGastos);
@@ -233,13 +191,13 @@ const compararAcumulados = () => {
 const reportarResultados = (contenedor, resultado) => {
     let card = `<div class="card">
     <div class="card-body">
-      <h5 class="card-title">Resultado</h5>
-      <p class="card-text">Considerando la totalidad de los conceptos registrados: </p>
-      <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')}</p>
-      <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')}</p>
-      <p class="card-text">Una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')}</p>
+    <h5 class="card-title">Resultado</h5>
+    <p class="card-text">Considerando la totalidad de los conceptos registrados: </p>
+    <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')}</p>
+    <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')}</p>
+    <p class="card-text">Una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')}</p>
     </div>
-  </div>`;
+</div>`;
     contenedor.innerHTML = card;
 }
 
@@ -263,15 +221,16 @@ const filtrarConceptos = (arrayGastos, arrayIngresos, mes) => {
     let nuevosGastos;
     let nuevosIngresos;
     if (mes === "sinFiltro") {
-        nuevosGastos = obtenerGastosLS();
-        nuevosIngresos = obtenerIngresosLS();
+        nuevosGastos = obtenerConceptosLS("gastos");
+        nuevosIngresos = obtenerConceptosLS("ingresos");
     }
     else {
         nuevosGastos = arrayGastos.filter(gasto => gasto.mes === mes);
         nuevosIngresos = arrayIngresos.filter(ingreso => ingreso.mes === mes);
     }
-    renderGastos(nuevosGastos);
-    renderIngresos(nuevosIngresos);
+    renderConceptos("gastos", nuevosGastos);
+    renderConceptos("ingresos", nuevosIngresos);
+
 }
 
 // Evento
