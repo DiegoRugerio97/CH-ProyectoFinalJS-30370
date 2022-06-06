@@ -165,9 +165,9 @@ const validacionConcepto = (e) => {
     }
     let isValidForm = validacionFormDeclaracion();
     habilitarBoton(isValidForm, botonAgregar);
-    renderValidacionInput(e.target,isValid);
+    renderValidacionInput(e.target, isValid);
 
-    
+
 }
 
 const validacionMonto = (e) => {
@@ -185,7 +185,7 @@ const validacionMonto = (e) => {
     }
     let isValid = validacionFormDeclaracion();
     habilitarBoton(isValid, botonAgregar);
-    renderValidacionInput(e.target,mayorCero);
+    renderValidacionInput(e.target, mayorCero);
 
 }
 
@@ -211,6 +211,8 @@ const handlerAgregarConcepto = (e) => {
     }
     e.target.reset();
     botonAgregar.setAttribute("disabled", "");
+    conceptoCorrecto = false;
+    montoCorrecto = false;
 }
 
 const formConcepto = document.getElementById("formConcepto");
@@ -232,9 +234,10 @@ const reportarResultados = (contenedor, resultado) => {
     let card = `<div class="card">
     <div class="card-body">
       <h5 class="card-title">Resultado</h5>
-      <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos}</p>
-      <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos}</p>
-      <p class="card-text">Una diferencia de $${resultado.diferencia}</p>
+      <p class="card-text">Considerando la totalidad de los conceptos registrados: </p>
+      <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')}</p>
+      <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')}</p>
+      <p class="card-text">Una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')}</p>
     </div>
   </div>`;
     contenedor.innerHTML = card;
@@ -250,3 +253,26 @@ const handlerDeclarar = (e) => {
 
 const formDeclaracion = document.getElementById("formDeclaracionAnual");
 formDeclaracion.addEventListener("submit", handlerDeclarar);
+
+// Opciones de filtrado de conceptos
+
+// Select del filtro
+const selectFiltro = document.getElementById("inputFiltroMes");
+// Funcion de filtrado
+const filtrarConceptos = (arrayGastos, arrayIngresos, mes) => {
+    let nuevosGastos;
+    let nuevosIngresos;
+    if (mes === "sinFiltro") {
+        nuevosGastos = obtenerGastosLS();
+        nuevosIngresos = obtenerIngresosLS();
+    }
+    else {
+        nuevosGastos = arrayGastos.filter(gasto => gasto.mes === mes);
+        nuevosIngresos = arrayIngresos.filter(ingreso => ingreso.mes === mes);
+    }
+    renderGastos(nuevosGastos);
+    renderIngresos(nuevosIngresos);
+}
+
+// Evento
+selectFiltro.addEventListener("change", () => filtrarConceptos(gastos, ingresos, valorInputText(selectFiltro)));
