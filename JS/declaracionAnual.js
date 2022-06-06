@@ -159,17 +159,19 @@ const handlerAgregarConcepto = (e) => {
     if (isGasto) {
         registrarGastoDeducible(gastos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
         guardarConceptoLS("gastos",gastos);
-        renderConceptos("gastos",gastos);
     }
     else {
         registrarGastoDeducible(ingresos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
         guardarConceptoLS("ingresos",ingresos);
-        renderConceptos("ingresos",ingresos);
     }
     e.target.reset();
     botonAgregar.setAttribute("disabled", "");
     conceptoCorrecto = false;
     montoCorrecto = false;
+    selectFiltro.value = "sinFiltro";
+    renderConceptos("gastos",gastos);
+    renderConceptos("ingresos",ingresos);
+
 }
 
 const formConcepto = document.getElementById("formConcepto");
