@@ -185,21 +185,30 @@ const compararAcumulados = () => {
     const acumuladoIngresos = arrayIngresos.reduce((acumulado, ingreso) => acumulado + ingreso.monto, 0);
     const acumuladoGastos = arrayGastos.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
     const diferencia = Math.abs(acumuladoIngresos - acumuladoGastos);
-    return { acumuladoIngresos: acumuladoIngresos, acumuladoGastos: acumuladoGastos, diferencia: diferencia };
+    return { acumuladoIngresos: acumuladoIngresos, acumuladoGastos: acumuladoGastos, diferencia: diferencia , saldoFavor : acumuladoGastos > acumuladoIngresos};
 }
 
 // Reporte de resultados
 const reportarResultados = (contenedor, resultado) => {
+    let parrafoResultado = document.createElement("p");
+    if(resultado.saldoFavor){
+        parrafoResultado.innerHTML = `Te corresponde una devolución de ISR de $${resultado.diferencia.toLocaleString('en-Latn-US')} por parte del SAT`;
+    }
+    else{
+        parrafoResultado.innerHTML = `Necesitas pagar una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')} al SAT`;
+    }
+
     let card = `<div class="card">
-    <div class="card-body">
+    <div id = "cardResultado" class="card-body">
     <h5 class="card-title">Resultado</h5>
     <p class="card-text">Considerando la totalidad de los conceptos registrados: </p>
     <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')}</p>
     <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')}</p>
-    <p class="card-text">Una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')}</p>
     </div>
 </div>`;
     contenedor.innerHTML = card;
+    const cardResultado = document.getElementById("cardResultado");
+    cardResultado.appendChild(parrafoResultado);
 }
 
 const resultadosDeclaracion = document.getElementById("resultadosDeclaracion");
