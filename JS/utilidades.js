@@ -62,13 +62,26 @@ const resetBotones = () =>{
         if (!containsDisabled) {
             boton.setAttribute("disabled","");
         }
+        // Unico boton siempre activo
+        if (boton.id == "botonCalcularDeclaracion"){
+            boton.removeAttribute("disabled");
+        }
     });
+}
+
+const limpiarResultados = () =>{
+    resultadosISR.innerHTML = "";
+    resultadosDeclaracion.innerHTML = "";
+    resultadosAguinaldo.innerHTML = "";
+
 }
 
 const limpiarTab = () => {
     limpiarAlerta();
+    limpiarResultados();
     resetForms();
     resetBotones();
+    resetSegmentos();
 }
 
 

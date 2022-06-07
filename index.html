@@ -12,7 +12,11 @@
       crossorigin="anonymous"
     />
     <!-- CSS del Toastify -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
     <!-- CSS Propio -->
     <link rel="stylesheet" href="./styles/styles.css" />
     <title>C&R|Calculadoras</title>
@@ -120,8 +124,7 @@
       <!-- Contenido -->
       <section class="tab-content" id="tabPagina">
         <!-- Alerta -->
-        <div id="alertas">
-        </div>
+        <div id="alertas"></div>
 
         <!-- Aguinaldo -->
         <div
@@ -131,7 +134,7 @@
           aria-labelledby="tabAguinaldo"
         >
           <div class="contenidoTab">
-            <form id = "calcularAguinaldo">
+            <form id="calcularAguinaldo">
               <!-- Input para el salario -->
               <div class="form-row">
                 <div class="form-group col-md-12">
@@ -163,7 +166,9 @@
                 </div>
                 <!-- Radio para cumplimiento de año o menos en la empresa -->
                 <fieldset>
-                  <legend>¿Ya cumpliste el año de trabajo en tu empresa?</legend>
+                  <legend>
+                    ¿Ya cumpliste el año de trabajo en tu empresa?
+                  </legend>
                   <div class="form-check">
                     <input
                       class="form-check-input"
@@ -191,36 +196,39 @@
                   </div>
                 </fieldset>
               </div>
-  
+
               <!-- Input adicional en caso de haber marcado 'No' en el radio -->
               <!-- Aparecera en caso de haber seleccionado No -->
               <div class="form-row hidden" id="formDiasTrabajados"">
                 <div class="form-group col-md-6">
                   <label for="inputDiasTrabajados"
-                  >Días del año trabajados.</label
+                    >Días del año trabajados.</label
                   >
                   <input
-                  type="number"
-                  class="form-control campoTexto"
-                  id="inputDiasTrabajados"
+                    type="number"
+                    class="form-control campoTexto"
+                    id="inputDiasTrabajados"
                   />
                   <small id="inputDiasTrabajadosAux" class="form-text text-muted">
-                  Introduce los días trabajados en tu empresa.
-                  </small>
-                  </div>
+                    Introduce los días trabajados en tu empresa.</small
+                  >
+                </div>
               </div>
-  
+
               <div class="form-row">
-                <button type="submit" class="btn btn-light centrado" id="botonAguinaldo" disabled>
+                <button
+                  type="submit"
+                  class="btn btn-light centrado"
+                  id="botonAguinaldo"
+                  disabled
+                >
                   Calcular Aguinaldo
                 </button>
               </div>
             </form>
             <!-- Div con el resultado del calculo, dinamico con JS -->
-            <div id="resultadosAguinaldo" class="resultadosAguinaldo">
-            </div>
+            <div id="resultadosAguinaldo" class="resultadosAguinaldo"></div>
           </div>
-          
         </div>
 
         <!-- ISR -->
@@ -230,46 +238,49 @@
           role="tabpanel"
           aria-labelledby="tabRetencion"
         >
-        <div class="contenidoTab">
-          <form id="formISR">
-            <div class="form-row">
-              <!-- Range para el salario -->
-              <div class="form-group col-md-12">
-                <label for="inputSalarioISR">Salario Mensual (MXN)</label>
-                <input
-                  type="number"
-                  class="form-control campoTexto"
-                  id="inputSalarioISR"
-                />
+          <div class="contenidoTab">
+            <form id="formISR">
+              <div class="form-row">
+                <!-- Range para el salario -->
+                <div class="form-group col-md-12">
+                  <label for="inputSalarioISR">Salario Mensual (MXN)</label>
+                  <input
+                    type="number"
+                    class="form-control campoTexto"
+                    id="inputSalarioISR"
+                  />
+                </div>
               </div>
+              <div class="form-row">
+                <button
+                  type="submit"
+                  class="btn btn-light centrado"
+                  id="botonISR"
+                  disabled
+                >
+                  Calcular Retención
+                </button>
+              </div>
+            </form>
+            <!-- Tabla de segmentos con JS -->
+            <div class="table-responsive" id="tablaSegmentos">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Lìmite Inferior (MXN)</th>
+                    <th scope="col">Lìmite Superior (MXN)</th>
+                    <th scope="col">Cuota Fija (MXN)</th>
+                    <th scope="col">% Sobre excedente</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBodySegmentos">
+                  <!-- Contenido creado en JS -->
+                </tbody>
+              </table>
             </div>
-            <div class="form-row">
-              <button type="submit" class="btn btn-light centrado" id="botonISR" disabled>
-                Calcular Retención
-              </button>
-            </div>
-          </form>
-          <!-- Tabla de segmentos con JS -->
-          <div class="table-responsive" id = "tablaSegmentos">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Lìmite Inferior (MXN)</th>
-                  <th scope="col">Lìmite Superior (MXN)</th>
-                  <th scope="col">Cuota Fija (MXN)</th>
-                  <th scope="col">% Sobre excedente</th>
-                </tr>
-              </thead>
-              <tbody id="tableBodySegmentos">
-                <!-- Contenido creado en JS -->
-              </tbody>
-            </table>
+            <!-- Resultados de la retencion -->
+            <div id="resultadosISR" class="resultadosAguinaldo"></div>
           </div>
-          <!-- Resultados de la retencion -->
-          <div id="resultadosISR" class="resultadosAguinaldo">
-
-          </div>
-        </div>
         </div>
 
         <!-- Declaracion Anual -->
@@ -279,92 +290,135 @@
           role="tabpanel"
           aria-labelledby="tabAnual"
         >
-        <div class="contenidoTab">
-          <div class="formDec centrado">
-            <form id="formConcepto">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputTipo">Tipo de concepto</label>
-                  <select class="custom-select" id="inputTipo">
-                    <option value="ingreso" selected>Ingreso</option>
-                    <option value="gastoDeducible">Gasto Deducible</option>
-                  </select>
-                  <small id="inputTipoAux" class="form-text text-muted">
-                    Selecciona el tipo de concepto a registrar.
-                  </small>
+          <div class="contenidoTab">
+            <div class="formDec centrado">
+              <form id="formConcepto">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputTipo">Tipo de concepto</label>
+                    <select class="custom-select" id="inputTipo">
+                      <option value="ingreso" selected>Ingreso</option>
+                      <option value="gastoDeducible">Gasto Deducible</option>
+                    </select>
+                    <small id="inputTipoAux" class="form-text text-muted">
+                      Selecciona el tipo de concepto a registrar.
+                    </small>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputConcepto"
+                      >Concepto del ingreso/gasto</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control campoTexto"
+                      id="inputConcepto"
+                    />
+                    <small id="inputTipoAux" class="form-text text-muted">
+                      Introduce la descripción del concepto.
+                    </small>
+                  </div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="inputConcepto">Concepto del ingreso/gasto</label>
-                  <input
-                    type="text"
-                    class="form-control campoTexto"
-                    id="inputConcepto"
-                  />
-                  <small id="inputTipoAux" class="form-text text-muted">
-                    Introduce la descripción del concepto.
-                  </small>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputMes"
+                      >Mes del ingreso/gasto deducible</label
+                    >
+                    <select class="custom-select" id="inputMes">
+                      <option value="Enero" selected>Enero</option>
+                      <option value="Febrero">Febrero</option>
+                      <option value="Marzo">Marzo</option>
+                      <option value="Abril">Abril</option>
+                      <option value="Mayo">Mayo</option>
+                      <option value="Junio">Junio</option>
+                      <option value="Julio">Julio</option>
+                      <option value="Agosto">Agosto</option>
+                      <option value="Septiembre">Septiembre</option>
+                      <option value="Octubre">Octubre</option>
+                      <option value="Noviembre">Noviembre</option>
+                      <option value="Diciembre">Diciembre</option>
+                    </select>
+                    <small id="inputMesAux" class="form-text text-muted">
+                      Selecciona el mes donde se realizo el gasto o se obtuvo el
+                      ingreso.
+                    </small>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputMonto"
+                      >Monto del concepto en pesos mexicanos (MXN).</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control campoTexto"
+                      id="inputMonto"
+                    />
+                    <small id="inputMontoAux" class="form-text text-muted">
+                      Introduce el monto del ingreso o del gasto deducible.
+                    </small>
+                  </div>
                 </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputMes">Mes del ingreso/gasto deducible</label>
-                  <select class="custom-select" id="inputMes">
-                    <option value="Enero" selected>Enero</option>
-                    <option value="Febrero" >Febrero</option>
-                    <option value="Marzo" >Marzo</option>
-                    <option value="Abril" >Abril</option>
-                    <option value="Mayo" >Mayo</option>
-                    <option value="Junio" >Junio</option>
-                    <option value="Julio" >Julio</option>
-                    <option value="Agosto" >Agosto</option>
-                    <option value="Septiembre" >Septiembre</option>
-                    <option value="Octubre" >Octubre</option>
-                    <option value="Noviembre" >Noviembre</option>
-                    <option value="Diciembre" >Diciembre</option>
-                  </select>
-                  <small id="inputMesAux" class="form-text text-muted">
-                    Selecciona el mes donde se realizo el gasto o se obtuvo el
-                    ingreso.
-                  </small>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputMonto"
-                    >Monto del concepto en pesos mexicanos (MXN).</label
+                <div class="form-row">
+                  <button
+                    type="submit"
+                    class="btn btn-light centrado"
+                    id="botonAgregarConcepto"
+                    disabled
                   >
-                  <input
-                    type="number"
-                    class="form-control campoTexto"
-                    id="inputMonto"
-                  />
-                  <small id="inputMontoAux" class="form-text text-muted">
-                    Introduce el monto del ingreso o del gasto deducible.
-                  </small>
+                    Agregar concepto
+                  </button>
                 </div>
+              </form>
+            </div>
+            <!-- Cards -->
+            <div class = "contenedorDeclaracion">
+              <!-- Filtro -->
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputFiltroMes"
+                      >Filtrar visualización de conceptos por mes:
+                    </label>
+                    <select class="custom-select" id="inputFiltroMes">
+                      <option value="sinFiltro" selected>Sin Filtro</option>
+                      <option value="Enero">Enero</option>
+                      <option value="Febrero">Febrero</option>
+                      <option value="Marzo">Marzo</option>
+                      <option value="Abril">Abril</option>
+                      <option value="Mayo">Mayo</option>
+                      <option value="Junio">Junio</option>
+                      <option value="Julio">Julio</option>
+                      <option value="Agosto">Agosto</option>
+                      <option value="Septiembre">Septiembre</option>
+                      <option value="Octubre">Octubre</option>
+                      <option value="Noviembre">Noviembre</option>
+                      <option value="Diciembre">Diciembre</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+              <!-- Resultados -->
+              <!-- Donde ir agregando las cards -->
+              <div class="contenedorResultados">
+                <!-- Colocar cards de ingresos -->
+                <div class="contenedorCards" id="ingresos"></div>
+                <!-- Colocar cards de gastos -->
+                <div class="contenedorCards" id="gastos"></div>
               </div>
+            </div>
+            <form id="formDeclaracionAnual">
               <div class="form-row">
-                <button type="submit" class="btn btn-light centrado" id="botonAgregarConcepto" disabled>
-                  Agregar concepto
+                <button
+                  type="submit"
+                  class="btn btn-light centrado"
+                  id="botonCalcularDeclaracion"
+                >
+                  Declaración Anual
                 </button>
               </div>
             </form>
+            <div id="resultadosDeclaracion"></div>
           </div>
-          <!-- Donde ir agregando las cards -->
-          <div class="contenedorResultados">
-            <!-- Colocar cards de ingresos -->
-            <div class = "contenedorCards" id="ingresos"></div>
-            <!-- Colocar cards de gastos -->
-            <div class = "contenedorCards" id="gastos"></div>
-          </div>
-          <form id="formDeclaracionAnual">
-            <div class="form-row">
-              <button type="submit" class="btn btn-light centrado" id="botonCalcularDeclaracion">
-                Declaración Anual
-              </button>
-            </div>
-          </form>
-          <div id="resultadosDeclaracion"></div>
         </div>
-        </div>
+        
       </section>
     </main>
 
@@ -406,7 +460,10 @@
     <script src="./JS/ISR.js"></script>
     <script src="./JS/declaracionAnual.js"></script>
     <!-- Script del toastify -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
     <!-- Scripts de Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
