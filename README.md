@@ -43,7 +43,7 @@ Uso del OR para obtener los datos del local storage, uso del operador ternario p
 **Al menos una librería de uso relevante para el proyecto.**
 Se incluyo la librería Toastify para notificarle al usuario acerca de errores en las validaciones o en el caso de haber fallado al realizar el FETCH a los datos externos.
 
-**Manejo de promesas con fetch. **
+**Manejo de promesas con fetch.**
 **Carga de datos desde un JSON local o desde una API externa.**
 
 Se cargaron los datos de los segmentos para el cálculo de la retención de ISR a una base de datos en Firebase, la cual es fetcheada como un json. A través de una cadena de promesas, then, se obtienen los datos y en caso de fallar, se maneja el error con un catch.
