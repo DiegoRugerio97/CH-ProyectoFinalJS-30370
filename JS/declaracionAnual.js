@@ -71,8 +71,8 @@ const renderConceptos = (tipo, array) => {
     }
 }
 
-renderConceptos("gastos",gastos);
-renderConceptos("ingresos",ingresos);
+renderConceptos("gastos", gastos);
+renderConceptos("ingresos", ingresos);
 
 // Para el registro, se usara Date.now() para tener un id unico.
 // Registrar gastos deducibles
@@ -158,19 +158,19 @@ const handlerAgregarConcepto = (e) => {
     let isGasto = valorInputText(selectConcepto) === "gastoDeducible";
     if (isGasto) {
         registrarGastoDeducible(gastos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
-        guardarConceptoLS("gastos",gastos);
+        guardarConceptoLS("gastos", gastos);
     }
     else {
         registrarGastoDeducible(ingresos, valorInputText(inputConcepto), valorInputText(selectMes), valorInput(inputMonto));
-        guardarConceptoLS("ingresos",ingresos);
+        guardarConceptoLS("ingresos", ingresos);
     }
     e.target.reset();
     botonAgregar.setAttribute("disabled", "");
     conceptoCorrecto = false;
     montoCorrecto = false;
     selectFiltro.value = "sinFiltro";
-    renderConceptos("gastos",gastos);
-    renderConceptos("ingresos",ingresos);
+    renderConceptos("gastos", gastos);
+    renderConceptos("ingresos", ingresos);
 
 }
 
@@ -185,25 +185,25 @@ const compararAcumulados = () => {
     const acumuladoIngresos = arrayIngresos.reduce((acumulado, ingreso) => acumulado + ingreso.monto, 0);
     const acumuladoGastos = arrayGastos.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
     const diferencia = Math.abs(acumuladoIngresos - acumuladoGastos);
-    return { acumuladoIngresos: acumuladoIngresos, acumuladoGastos: acumuladoGastos, diferencia: diferencia , saldoFavor : acumuladoGastos > acumuladoIngresos};
+    return { acumuladoIngresos: acumuladoIngresos, acumuladoGastos: acumuladoGastos, diferencia: diferencia, saldoFavor: acumuladoGastos > acumuladoIngresos };
 }
 
 // Reporte de resultados
 const reportarResultados = (contenedor, resultado) => {
     let parrafoResultado = document.createElement("p");
-    if(resultado.saldoFavor){
-        parrafoResultado.innerHTML = `Te corresponde una devolución de ISR de $${resultado.diferencia.toLocaleString('en-Latn-US')} por parte del SAT`;
+    if (resultado.saldoFavor) {
+        parrafoResultado.innerHTML = `Tienes un saldo fiscal a favor de $${resultado.diferencia.toLocaleString('en-Latn-US')} (MXN)`;
     }
-    else{
-        parrafoResultado.innerHTML = `Necesitas pagar una diferencia de $${resultado.diferencia.toLocaleString('en-Latn-US')} al SAT`;
+    else {
+        parrafoResultado.innerHTML = `Tienes un saldo fiscal en contra de $${resultado.diferencia.toLocaleString('en-Latn-US')} (MXN)`;
     }
 
     let card = `<div class="card">
     <div id = "cardResultado" class="card-body">
     <h5 class="card-title">Resultado</h5>
     <p class="card-text">Considerando la totalidad de los conceptos registrados: </p>
-    <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')}</p>
-    <p class="card-text">Un acumulado de gastos deducibles de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')}</p>
+    <p class="card-text">Con un acumulado de ingresos de $${resultado.acumuladoIngresos.toLocaleString('en-Latn-US')} (MXN).</p>
+    <p class="card-text">Un acumulado de deducciones de $${resultado.acumuladoGastos.toLocaleString('en-Latn-US')} (MXN).</p>
     </div>
 </div>`;
     contenedor.innerHTML = card;
