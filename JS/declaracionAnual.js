@@ -226,7 +226,7 @@ formDeclaracion.addEventListener("submit", handlerDeclarar);
 
 // Select del filtro
 const selectFiltro = document.getElementById("inputFiltroMes");
-// Funcion de filtrado
+// Funcion de filtrado, solo modifica lo que se muestra, no se eliminan ni se guardan los arrays
 const filtrarConceptos = (arrayGastos, arrayIngresos, mes) => {
     let nuevosGastos;
     let nuevosIngresos;

@@ -4,6 +4,7 @@
 // Se agrega el .json, especifico de Firebase
 const dbSegmentos = "https://ac-empresarial-db-default-rtdb.firebaseio.com/segmentos.json";
 const LIMITES_ISR = [];
+// Cadena de promesas para el fetch
 fetch(dbSegmentos).
     then(response => response.ok ? response.json() : Promise.reject("Error al cargar datos."))
     .then(data => cargarData(data, LIMITES_ISR))
@@ -29,7 +30,7 @@ let cargaDatosCorrecto = true;
 const errorCarga = () =>{
     cargaDatosCorrecto = false;
     const tablaSegmentos = document.getElementById("tablaSegmentos");
-    tablaSegmentos.classList = "centrado";
+    tablaSegmentos.className = "centrado";
     tablaSegmentos.innerHTML = "<p>Error al obtener datos. Refresca la página o intenta mas tarde. </p>";
     renderError("Error al obtener datos de segmentos. Intenta mas tarde.");
 }

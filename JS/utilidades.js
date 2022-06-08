@@ -22,7 +22,7 @@ const limpiarAlerta = () => {
     alertas.innerHTML = "";
 }
 
-//funcion utilizando condicional ternaria.
+// Funcion para habilitar boton
 const habilitarBoton = (isValid, boton) => {
     if (isValid) {
         boton.removeAttribute("disabled");

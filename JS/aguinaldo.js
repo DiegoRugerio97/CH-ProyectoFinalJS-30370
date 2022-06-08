@@ -8,10 +8,6 @@ const inputDiasTrabajados = document.getElementById("inputDiasTrabajados");
 let salarioAguinaldoCorrecto = false;
 let diasCorrecto = false;
 let diasTrabajadosCorrecto = false;
-// Booleanos para guardar estado de input touched/untouched
-// let salarioTouched = false;
-// let diasTouched = false;
-// let diasTrabajadosTouched = false;
 
 // Boton de calculo aguinaldo
 const botonAguinaldo = document.getElementById("botonAguinaldo");
@@ -42,6 +38,7 @@ const validacionSalarioAguinaldo = (e) => {
     habilitarBoton(isValid, botonAguinaldo);
     renderValidacionInput(e.target, mayorCero);
 }
+
 const validacionDias = (e) => {
     let mayorQuince = e.target.value >= 15;
     if (mayorQuince) {
@@ -76,21 +73,6 @@ const validacionDiasTrabajados = (e) => {
 inputSalarioAguinaldo.addEventListener("blur", validacionSalarioAguinaldo);
 inputDias.addEventListener("blur", validacionDias);
 inputDiasTrabajados.addEventListener("blur", validacionDiasTrabajados);
-
-// //Handlers touched para cada input
-// const touchedSalario = () => {
-//     salarioTouched = true;
-// }
-// const touchedDias = () => {
-//     diasTouched = true;
-// }
-// const touchedDiasTrabajados = () => {
-//     diasTrabajadosTouched = true;
-// }
-// Asignacion de event listeners
-// inputSalarioAguinaldo.addEventListener("blur", touchedSalario);
-// inputDias.addEventListener("blur", touchedDias);
-// inputDiasTrabajados.addEventListener("blur", touchedDiasTrabajados);
 
 // Input Extra del form para los dias trabajados en caso de no haber cumplido el año
 let anioCumplido = true;
