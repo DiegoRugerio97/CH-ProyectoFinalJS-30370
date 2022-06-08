@@ -4,7 +4,7 @@
 En este repositorio se encuentran los archivos correspondientes al proyecto de JavaScript de CoderHouse, comisión 30370.
 
 ## Objetivo
-El objetivo de esta aplicación web es proveer al usuario una colección de calculadoras financieras relacionadas a su actividad laboral, las cuales procesan cálculos normalmente realizados por un contador con conocimiento en el tema, tales como:
+El objetivo de esta aplicación web es proveer al usuario una colección de calculadoras financieras independientes relacionadas a su actividad laboral, las cuales procesan cálculos normalmente realizados por un contador con conocimiento en el tema, tales como:
 
 * Cálculo de aguinaldo
 * Cálculo de la retención de impuestos del salario
