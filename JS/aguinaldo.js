@@ -106,6 +106,8 @@ radioDiasTrabajadosNo.addEventListener("click", () => {
 radioDiasTrabajadosSi.addEventListener("click", () => {
     inputExtra.className = "form-row hidden";
     anioCumplido = true;
+    let isValid = validacionFormAguinaldo();
+    habilitarBoton(isValid, botonAguinaldo);
 });
 
 // Constantes
